@@ -49,22 +49,41 @@ export const NavMenus = styled.div`
 
 export const NavMenu = styled.div`
     display: flex;
-    margin: 0 1.5rem;
+    margin: 0 0.5rem;
 `
 
 export const Currency = styled.div`
     display: flex;
-    place-items: center;
+    align-items: center;
+    justify-content: center;
     position: absolute;
     flex-direction: column;
     bottom: 0;
     right: 0;
-    overflow: scroll;
-    font-size: 0.8rem;
-    height: 200%;
-    transform: translateY(100%) translateX(20%);
+    overflow: hidden;
+    font-size: 0.9em;
+    height: 300%;
+    width: 100%;
+    transform: translateY(92%) translateX(-20%);
     background: #FFFFFF;
-    width: 120%;
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
-    padding: 0.2em;
+    z-index: 2000;
+`;
+
+export const CartNumber = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 1.5em;
+    width: 1.5em;
+    font-size: 0.9em;
+    padding: 0.3em;
+    background: #1D1F22;
+    color: white;
+    border-radius: 50%;
+    z-index: 2000;
+    transform: translateY(20%) translateX(20%);
 `;

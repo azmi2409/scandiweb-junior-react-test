@@ -7,6 +7,7 @@ import {
   NavBrand,
   NavMenus,
   NavMenu,
+  CartNumber,
   Currency
 } from "./HeaderStyle";
 import { Link } from "react-router-dom";
@@ -29,12 +30,15 @@ export default class Header extends Component {
           <img src={Brand} alt="Brand" />
         </NavBrand>
         <NavMenus>
-          <NavMenu onClick={curr}>
+          <NavMenu ref={this.props.innerRef} onClick={curr}>
             <p style={{marginRight: '0.2em'}}>{this.props.currency}</p>
           {Arrow && <img className={isCurrencyOpen? 'rotate' : ''} src={Arrow} alt="Arrow" />}
+          {isCurrencyOpen && <Currency onClick={(e) => e.stopPropagation()}><ul style={{listStyle: 'none',padding: 0}}>{currencies.map((v,i) => (<li onClick={() => chCurr(v.symbol)} style={{marginBottom: '0.5em'}} key={i}>{`${v.symbol} ${v.label}`}</li>))}</ul></Currency>}
           </NavMenu>
-          {Cart && <img src={Cart} alt="Cart" />}
-          {isCurrencyOpen && <Currency><ul style={{listStyle: 'none',padding: 0}}>{currencies.map((v,i) => (<li onClick={() => chCurr(v.symbol)} style={{marginBottom: '0.5em'}} key={i}>{`${v.symbol} ${v.label}`}</li>))}</ul></Currency>}
+          <NavMenu>
+          <img src={Cart} style={{position: 'relative'}} alt="Cart" />
+          <CartNumber>1</CartNumber>
+          </NavMenu>
         </NavMenus>
       </Container>
     );

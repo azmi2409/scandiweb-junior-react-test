@@ -8,11 +8,12 @@ class ProductList extends Component {
   componentDidMount() {
     const category = this.props.params.category;
     this.props.click(category);
+    document.title = `Product List Page | ${this.props.selected}`;
   }
   componentDidUpdate(prevProps) {
     if (this.props.params.category !== prevProps.params.category) {
       const category = this.props.params.category;
-      this.props.click(category);
+      this.props.click(category).then(() => document.title = `Product List Page | ${this.props.selected}`);
     }
   }
   render() {

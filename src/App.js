@@ -18,7 +18,9 @@ class App extends Component {
     this.handleAdd = this.handleAdd.bind(this);
     this.getPrice = this.getPrice.bind(this);
     this.currOpen = this.currOpen.bind(this);
+    this.handleOutsideClick = this.handleOutsideClick.bind(this);
     this.changeCurr = this.changeCurr.bind(this);
+    this.myRef = React.createRef();
     this.state = {
       selected: "all",
       products: [],
@@ -36,9 +38,12 @@ class App extends Component {
   }
 
   currOpen = () => {
-    this.setState({
-      isCurrencyOpen: !this.state.isCurrencyOpen,
-    });
+    this.setState(state => ({...state, isCurrencyOpen: !state.isCurrencyOpen}));
+    if(!this.state.isCurrencyOpen){
+      document.addEventListener("click", this.handleOutsideClick, false);
+    } else {
+      document.removeEventListener("click", this.handleOutsideClick, false);
+    }
   };
 
   handleProduct = async (product) => {
@@ -49,6 +54,14 @@ class App extends Component {
   handleClick = async (category) => {
     const data = await getCategory(category);
     this.setState({ selected: category, products: data });
+  };
+
+  handleOutsideClick = (e) => {
+    if(this.myRef.current){
+    if (this.myRef.current && !this.myRef.current.contains(e.target)) {
+      this.currOpen();
+    }
+  }
   };
 
   handleAdd = (item) => {
@@ -84,7 +97,7 @@ class App extends Component {
   render() {
     return (
         <BrowserRouter>
-        <Header chCurr={this.changeCurr} curr={this.currOpen} {...this.state} {...this.props} />
+        <Header innerRef={this.myRef} chCurr={this.changeCurr} curr={this.currOpen} {...this.state} {...this.props} />
           <Routes>
             <Route
               path="/"
@@ -103,7 +116,7 @@ class App extends Component {
             />
             <Route
               path="/product/:product"
-              element={<ProductDisplay price={this.getPrice} {...this.state} handleProduct={this.handleProduct} product={this.state.product} />}
+              element={<ProductDisplay chPict={this.chPict} price={this.getPrice} {...this.state} handleProduct={this.handleProduct} product={this.state.product} />}
             />
             <Route
               path="/cart"
