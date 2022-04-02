@@ -1,10 +1,18 @@
-import React from "react";
+import React, { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import cartReducer from "./lib/reducers/cartReducer";
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
+const store = createStore(cartReducer);
 
 ReactDOM.render(
-    <App />,
+  <StrictMode>
+    <Provider store={store}>
+    <App />
+    </Provider>
+  </StrictMode>,
   document.getElementById("root")
 );
 

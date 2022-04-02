@@ -1,73 +1,49 @@
 import React, { Component } from "react";
-import ProductList from "./ProductList";
+import Redirect from "./components/Redirect";
+import Cart from "./components/Cart/Cart";
+import ProductList from "./components/ProductList/ProductList";
 import Header from "./components/Header/Header";
-import { request, gql } from "graphql-request";
+import { connect } from "react-redux";
+import { addToCategories , addToCart } from "./lib/actions/cartActions";
+import ProductDisplay from "./components/ProductDisplay/ProductDisplay";
+import { getCategory, getProduct , getCategories , getCurrencies } from "./lib/helpers/";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./lib/main.css";
 
-const endpoint = `http://10.0.0.22:4000`;
-const CATEGORIES_QUERY = gql`
-  {
-    categories {
-      name
-    }
-  }
-`;
-
-const getCategory = async (category) => {
-  const query = gql`
-  {
-    category(input: {
-      title: "${category}"}
-      ) {
-      products {
-        id
-        name
-      }
-    }
-  }`;
-
-  const data = await request(endpoint, query);
-  return data.category.products;
-};
-
-const getProduct = async (product) => {
-  const query = gql`
-  {
-    product(id: "${product}") {
-      name
-      inStock
-      gallery
-      description
-      brand
-      prices{
-        amount
-        currency{
-          symbol
-        }
-      }
-    }
-  }`;
-  const data = await request(endpoint, query);
-  return data.product;
-};
-
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.handleProduct = this.handleProduct.bind(this);
-    this.createMarkup = this.createMarkup.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
+    this.getPrice = this.getPrice.bind(this);
+    this.currOpen = this.currOpen.bind(this);
+    this.changeCurr = this.changeCurr.bind(this);
     this.state = {
-      categories: [],
-      selected: "",
+      selected: "all",
       products: [],
       product: "",
+      currencies: [],
+      currency: "$",
+      isCartOpen: false,
+      isCurrencyOpen: false,
     };
   }
+
+  changeCurr(currency) {
+    this.setState({ currency });
+    this.currOpen();
+  }
+
+  currOpen = () => {
+    this.setState({
+      isCurrencyOpen: !this.state.isCurrencyOpen,
+    });
+  };
 
   handleProduct = async (product) => {
     const data = await getProduct(product);
     this.setState({ product: data });
-    console.log(data);
   };
 
   handleClick = async (category) => {
@@ -75,74 +51,88 @@ export default class App extends Component {
     this.setState({ selected: category, products: data });
   };
 
-  createMarkup(html) {
-    return { __html: html };
+  handleAdd = (item) => {
+    const obj = {
+      id: item.id,
+      name: item.name,
+      price: item.prices[0].amount,
+      currency: item.prices[0].currency.symbol,
+      size: item.size,
+      quantity: 1,
+    }
+    this.props.addToCart(obj);
+  };
+
+  getPrice = (prices) => {
+    const index = prices.findIndex((v) => v.currency.symbol === this.state.currency);
+    return prices[index].currency.symbol+prices[index].amount
   }
 
   componentDidMount() {
-    const data = async () => {
-      const res = await request(endpoint, CATEGORIES_QUERY);
-      this.setState({
-        categories: [...res.categories],
-      });
-      return res;
+    getCategories().then((data) => {
+      this.setState({categories: data});
+      const arr = data.reduce((acc, v) => {
+        acc = [...acc, v.name];
+        return acc;
+      }, []);
+      this.props.addToCategories(arr);
+    });
+    getCurrencies().then((data) => {
+      this.setState({currencies: data});
+    });
     };
-
-    data();
-  }
   render() {
     return (
       <div>
-        <Header categories={this.state.categories} />
-        <ul>
-          {this.state.categories.map((category) => {
-            return (
-              <li
-                key={category.name}
-                onClick={() => this.handleClick(category.name)}
-              >
-                {category.name}
-              </li>
-            );
-          })}
-        </ul>
-        <div>{this.state.selected && <h2>{this.state.selected}</h2>}</div>
-        <div>
-          <ul>
-            {this.state.products &&
-              this.state.products.map((v, i) => {
-                return (
-                  <li key={i} onClick={() => this.handleProduct(v.id)}>
-                    {`${v.name} id: ${v.id}`}
-                  </li>
-                );
-              })}
-          </ul>
-        </div>
-        <div>
-          <h2>Selected Product</h2>
-          {this.state.product && (
-            <div>
-              <ul>
-                <li>Name: {this.state.product.name}</li>
-                <li>
-                  Stock: {this.state.product.inStock ? "Ready" : "Out of Stock"}
-                </li>
-                <li>
-                  Brand: {this.state.product.brand}
-                </li>
-                <li>
-                  Price: {this.state.product.prices[0].currency.symbol+parseInt(this.state.product.prices[0].amount)}
-                </li>
-              </ul>
-              <h3>Product Description</h3>
-              <div dangerouslySetInnerHTML={this.createMarkup(this.state.product.description)} />
-              <h3>Product Gallery</h3>
-              <div>{this.state.product.gallery && this.state.product.gallery.map((v,i) => (<img key={i} style={{maxHeight: '20vh'}} src={v} />))}</div>
-            </div>
-          )}
-        </div>
+        <BrowserRouter>
+        <Header chCurr={this.changeCurr} curr={this.currOpen} {...this.state} {...this.props} />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Redirect />
+              }
+            />
+            <Route
+              path="/:category"
+              element={
+                <ProductList
+                  handleProduct={this.handleProduct}
+                  {...this.state} price={this.getPrice} click={this.handleClick} handleAdd={this.handleAdd}
+                />
+              }
+            />
+            <Route
+              path="/product/:product"
+              element={<ProductDisplay price={this.getPrice} {...this.state} handleProduct={this.handleProduct} product={this.state.product} />}
+            />
+            <Route
+              path="/cart"
+              element={<Cart />}
+            />
+          </Routes>
+        </BrowserRouter>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    categories: state.categories,
+    items: state.items,
+    cart: state.cart
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCategories: (categories) => {
+      dispatch(addToCategories(categories));
+    },
+    addToCart: (obj) => {
+      dispatch(addToCart(obj));
+    }
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -24,13 +24,12 @@ export const NavItem = styled.li`
     cursor: pointer;
     display: flex;
     height: 100%;
-    align-items: flex-start;
-    border-bottom: 2px solid #5ECE7B;
-    color: #5ECE7B;
+    align-items: center;
 `
 
 export const NavCategory = styled.div`
     display: flex;
+    height: 100%;
 `
 
 export const NavBrand = styled.div`
@@ -45,9 +44,27 @@ export const NavMenus = styled.div`
     flex-direction: row;
     justify-content: space-between;
     cursor: pointer;
+    position: relative;
 `
 
 export const NavMenu = styled.div`
     display: flex;
-    margin: 0 1rem;
+    margin: 0 1.5rem;
 `
+
+export const Currency = styled.div`
+    display: flex;
+    place-items: center;
+    position: absolute;
+    flex-direction: column;
+    bottom: 0;
+    right: 0;
+    overflow: scroll;
+    font-size: 0.8rem;
+    height: 200%;
+    transform: translateY(100%) translateX(20%);
+    background: #FFFFFF;
+    width: 120%;
+    box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+    padding: 0.2em;
+`;
