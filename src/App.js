@@ -83,7 +83,6 @@ class App extends Component {
     };
   render() {
     return (
-      <div>
         <BrowserRouter>
         <Header chCurr={this.changeCurr} curr={this.currOpen} {...this.state} {...this.props} />
           <Routes>
@@ -112,7 +111,6 @@ class App extends Component {
             />
           </Routes>
         </BrowserRouter>
-      </div>
     );
   }
 }

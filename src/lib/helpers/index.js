@@ -5,7 +5,7 @@ export function withParams(Component) {
   return (props) => <Component {...props} params={useParams()} />;
 }
 
-const endpoint = `http://10.0.0.22:4000`;
+const endpoint = `https://graphql-scandiweb.herokuapp.com/`;
 
 export const getCategories = async () => {
   const CATEGORIES_QUERY = gql`
