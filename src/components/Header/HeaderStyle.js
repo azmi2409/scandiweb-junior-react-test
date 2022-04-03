@@ -3,10 +3,10 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  place-items: center;
   max-height: 20vh;
   max-width: 100vw;
-  padding: 1em;
+  padding: 1em 3em;
+  margin: 0 2em;
 `;
 
 export const NavLink = styled.ul`
@@ -25,11 +25,15 @@ export const NavItem = styled.li`
     display: flex;
     height: 100%;
     align-items: center;
-`
+    ${props => props.active && `border-bottom: 2px solid #5ECE7B;
+        color: #5ECE7B;`
+    }
+`;
 
 export const NavCategory = styled.div`
     display: flex;
     height: 100%;
+    justify-content: flex-start;
 `
 
 export const NavBrand = styled.div`
@@ -42,7 +46,7 @@ export const NavMenus = styled.div`
     display: flex;
     align-items: center;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
     cursor: pointer;
     position: relative;
 `
@@ -50,6 +54,7 @@ export const NavMenus = styled.div`
 export const NavMenu = styled.div`
     display: flex;
     margin: 0 0.5rem;
+    padding: 0 0.5rem;
 `
 
 export const Currency = styled.div`
@@ -60,11 +65,9 @@ export const Currency = styled.div`
     flex-direction: column;
     bottom: 0;
     right: 0;
-    overflow: hidden;
     font-size: 0.9em;
-    height: 300%;
-    width: 100%;
-    transform: translateY(92%) translateX(-20%);
+    height: 220%;
+    transform: translateY(90%) translateX(-30%);
     background: #FFFFFF;
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
     z-index: 2000;
@@ -85,5 +88,5 @@ export const CartNumber = styled.div`
     color: white;
     border-radius: 50%;
     z-index: 2000;
-    transform: translateY(20%) translateX(20%);
+    transform: translateY(20%);
 `;

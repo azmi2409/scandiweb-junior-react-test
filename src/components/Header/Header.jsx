@@ -8,22 +8,26 @@ import {
   NavMenus,
   NavMenu,
   CartNumber,
-  Currency
+  Currency,
 } from "./HeaderStyle";
 import { Link } from "react-router-dom";
 import Brand from "../../assets/Brand.svg";
 import Cart from "../../assets/Cart.svg";
-import Arrow from '../../assets/Arrow.svg';
+import Arrow from "../../assets/Arrow.svg";
 
 export default class Header extends Component {
   render() {
-    const { categories,currencies,isCurrencyOpen,curr,chCurr } = this.props;
+    const { categories, currencies, isCurrencyOpen, curr, chCurr } = this.props;
     return (
       <Container>
         <NavCategory>
           <NavLink>
             {categories &&
-              categories.map((v, i) => (<Link style={{textDecoration: 'none'}} to={`/${v}`} key={i}><NavItem className={(this.props.selected === v)? 'link-active' : ''}>{v}</NavItem></Link>))}
+              categories.map((v, i) => (
+                <Link style={{ textDecoration: "none" }} to={`/${v}`} key={i}>
+                  <NavItem active={this.props.selected === v}>{v}</NavItem>
+                </Link>
+              ))}
           </NavLink>
         </NavCategory>
         <NavBrand>
@@ -31,13 +35,31 @@ export default class Header extends Component {
         </NavBrand>
         <NavMenus>
           <NavMenu ref={this.props.innerRef} onClick={curr}>
-            <p style={{marginRight: '0.2em'}}>{this.props.currency}</p>
-          {Arrow && <img className={isCurrencyOpen? 'rotate' : ''} src={Arrow} alt="Arrow" />}
-          {isCurrencyOpen && <Currency onClick={(e) => e.stopPropagation()}><ul style={{listStyle: 'none',padding: 0}}>{currencies.map((v,i) => (<li onClick={() => chCurr(v.symbol)} style={{marginBottom: '0.5em'}} key={i}>{`${v.symbol} ${v.label}`}</li>))}</ul></Currency>}
+            <p style={{ marginRight: "0.2em" }}>{this.props.currency}</p>
+            <img
+              className={isCurrencyOpen ? "rotate" : ""}
+              src={Arrow}
+              alt="Arrow"
+            />
+            {isCurrencyOpen && (
+              <Currency onClick={(e) => e.stopPropagation()}>
+                <ul style={{ listStyle: "none", padding: '0.8em' }}>
+                  {currencies
+                    .filter((v) => v.symbol !== this.props.currency)
+                    .map((v, i) => (
+                      <li
+                        onClick={() => chCurr(v.symbol)}
+                        style={{ margin: "0.8em 0" }}
+                        key={i}
+                      >{`${v.symbol} ${v.label}`}</li>
+                    ))}
+                </ul>
+              </Currency>
+            )}
           </NavMenu>
           <NavMenu>
-          <img src={Cart} style={{position: 'relative'}} alt="Cart" />
-          <CartNumber>1</CartNumber>
+            <img src={Cart} style={{ position: "relative" }} alt="Cart" />
+            <CartNumber>1</CartNumber>
           </NavMenu>
         </NavMenus>
       </Container>
