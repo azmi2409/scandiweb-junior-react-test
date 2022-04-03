@@ -17,7 +17,8 @@ import Arrow from "../../assets/Arrow.svg";
 
 export default class Header extends Component {
   render() {
-    const { categories, currencies, isCurrencyOpen, curr, chCurr } = this.props;
+    const { categories, currencies, isCurrencyOpen, curr, chCurr, cart } =
+      this.props;
     return (
       <Container>
         <NavCategory>
@@ -43,7 +44,7 @@ export default class Header extends Component {
             />
             {isCurrencyOpen && (
               <Currency onClick={(e) => e.stopPropagation()}>
-                <ul style={{ listStyle: "none", padding: '0.8em' }}>
+                <ul style={{ listStyle: "none", padding: "0.8em" }}>
                   {currencies
                     .filter((v) => v.symbol !== this.props.currency)
                     .map((v, i) => (
@@ -59,7 +60,7 @@ export default class Header extends Component {
           </NavMenu>
           <NavMenu>
             <img src={Cart} style={{ position: "relative" }} alt="Cart" />
-            <CartNumber>1</CartNumber>
+            {cart.length > 0 && <CartNumber>{cart.length}</CartNumber>}
           </NavMenu>
         </NavMenus>
       </Container>

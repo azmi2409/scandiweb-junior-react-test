@@ -16,7 +16,7 @@ import {
   Submit,
   ProductDesc,
 } from "./ProductDisplayStyle";
-import { Component } from "react";
+import React, { Component } from "react";
 import { withParams, createMarkup } from "../../lib/helpers/";
 
 class ProductDisplay extends Component {
@@ -54,7 +54,15 @@ class ProductDisplay extends Component {
   handleAddCart = () => {
     const checked = this.validateProps();
     if (checked) {
-      return;
+      const newItems = {
+        ...this.state.properties,
+        id: this.props.params.product,
+        name: this.props.product.name,
+        price: this.props.product.prices,
+        quantity: 1,
+        image: this.props.product.gallery[0],
+      };
+      return this.props.handleAdd(newItems);
     }
     return alert("You Need Fill All The Details");
   };
@@ -74,7 +82,7 @@ class ProductDisplay extends Component {
   Type = (type, val, name) => {
     if (type === "swatch") {
       return (
-        <Swatch
+        <Swatch key={val}
           onClick={() => this.addProps(val, name)}
           color={val}
           selected={this.checkProps(name, val)}
@@ -82,7 +90,7 @@ class ProductDisplay extends Component {
       );
     }
     return (
-      <Properties
+      <Properties key={val}
         onClick={() => this.addProps(val, name)}
         selected={this.checkProps(name, val)}
       >
@@ -98,11 +106,10 @@ class ProductDisplay extends Component {
       <Container>
         <SidePict>
           {product &&
-            product.gallery &&
             product.gallery.map((v, i) => (
               <Galleries
                 loading="lazy"
-                key={i}
+                key={v}
                 src={v}
                 alt="Product"
                 onClick={() => this.chPict(i)}
@@ -122,16 +129,18 @@ class ProductDisplay extends Component {
           <Description>
             <Brand>{product.brand}</Brand>
             <Item>{product.name}</Item>
-            {product.attributes.map((v, i) => (
-              <Attributes key={i}>
-                <AttrName>{v.name}</AttrName>
-                <AttrType>
-                  {v.items.map((val, i) =>
-                    this.Type(v.type, val.value, v.name)
-                  )}
-                </AttrType>
-              </Attributes>
-            ))}
+            <Attributes>
+              {product.attributes.map((v, i) => (
+                <React.Fragment key={i}>
+                  <AttrName key={v.name}>{v.name}</AttrName>
+                  <AttrType key={v.type}>
+                    {v.items.map((val) =>
+                      this.Type(v.type, val.value, v.name)
+                    )}
+                  </AttrType>
+                </React.Fragment>
+              ))}
+            </Attributes>
             <AttrName>Price:</AttrName>
             <AttrName>{price(product.prices)}</AttrName>
             <ButtonWrapper>

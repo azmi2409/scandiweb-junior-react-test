@@ -46,6 +46,7 @@ export const Swatch = styled.div`
   height: 45px;
   width: 45px;
   border-radius: 50%;
+  cursor: pointer;
   background-color: ${(props) => props.color};
   ${(props) => props.selected && "border: 2px solid #1D1F22;"}
 `;

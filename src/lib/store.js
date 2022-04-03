@@ -1,8 +1,16 @@
 import { createStore } from "redux";
-import rootReducer from "./reducers/rootReducer";
+import cartReducer from "./reducers/cartReducer";
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' 
 
-const configureStore = (state = {}) => {
-  return createStore(rootReducer,state);
+const persistConfig = {
+  key: 'cart',
+  storage,
 }
 
-export default configureStore;
+const persistedReducer = persistReducer(persistConfig, cartReducer)
+
+const store = createStore(persistedReducer)
+const persistor = persistStore(store)
+
+export {store,persistor}

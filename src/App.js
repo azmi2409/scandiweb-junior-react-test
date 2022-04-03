@@ -4,9 +4,14 @@ import Cart from "./components/Cart/Cart";
 import ProductList from "./components/ProductList/ProductList";
 import Header from "./components/Header/Header";
 import { connect } from "react-redux";
-import { addToCategories , addToCart } from "./lib/actions/cartActions";
+import { addToCategories, addToCart } from "./lib/actions/cartActions";
 import ProductDisplay from "./components/ProductDisplay/ProductDisplay";
-import { getCategory, getProduct , getCategories , getCurrencies } from "./lib/helpers/";
+import {
+  getCategory,
+  getProduct,
+  getCategories,
+  getCurrencies,
+} from "./lib/helpers/";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./lib/main.css";
 
@@ -38,8 +43,11 @@ class App extends Component {
   }
 
   currOpen = () => {
-    this.setState(state => ({...state, isCurrencyOpen: !state.isCurrencyOpen}));
-    if(!this.state.isCurrencyOpen){
+    this.setState((state) => ({
+      ...state,
+      isCurrencyOpen: !state.isCurrencyOpen,
+    }));
+    if (!this.state.isCurrencyOpen) {
       document.addEventListener("click", this.handleOutsideClick, false);
     } else {
       document.removeEventListener("click", this.handleOutsideClick, false);
@@ -57,33 +65,29 @@ class App extends Component {
   };
 
   handleOutsideClick = (e) => {
-    if(this.myRef.current){
-    if (this.myRef.current && !this.myRef.current.contains(e.target)) {
-      this.currOpen();
+    if (this.myRef.current) {
+      if (this.myRef.current && !this.myRef.current.contains(e.target)) {
+        this.currOpen();
+      }
     }
-  }
   };
 
   handleAdd = (item) => {
-    const obj = {
-      id: item.id,
-      name: item.name,
-      price: item.prices[0].amount,
-      currency: item.prices[0].currency.symbol,
-      size: item.size,
-      quantity: 1,
-    }
+    const obj = { ...item };
     this.props.addToCart(obj);
+    console.log('add Obj', this.props.cart);
   };
 
   getPrice = (prices) => {
-    const index = prices.findIndex((v) => v.currency.symbol === this.state.currency);
-    return prices[index].currency.symbol+prices[index].amount
-  }
+    const index = prices.findIndex(
+      (v) => v.currency.symbol === this.state.currency
+    );
+    return prices[index].currency.symbol + prices[index].amount;
+  };
 
   componentDidMount() {
     getCategories().then((data) => {
-      this.setState({categories: data});
+      this.setState({ categories: data });
       const arr = data.reduce((acc, v) => {
         acc = [...acc, v.name];
         return acc;
@@ -91,39 +95,47 @@ class App extends Component {
       this.props.addToCategories(arr);
     });
     getCurrencies().then((data) => {
-      this.setState({currencies: data});
+      this.setState({ currencies: data });
     });
-    };
+  }
   render() {
     return (
-        <BrowserRouter>
-        <Header innerRef={this.myRef} chCurr={this.changeCurr} curr={this.currOpen} {...this.state} {...this.props} />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Redirect />
-              }
-            />
-            <Route
-              path="/:category"
-              element={
-                <ProductList
-                  handleProduct={this.handleProduct}
-                  {...this.state} price={this.getPrice} click={this.handleClick} handleAdd={this.handleAdd}
-                />
-              }
-            />
-            <Route
-              path="/product/:product"
-              element={<ProductDisplay chPict={this.chPict} price={this.getPrice} {...this.state} handleProduct={this.handleProduct} product={this.state.product} />}
-            />
-            <Route
-              path="/cart"
-              element={<Cart />}
-            />
-          </Routes>
-        </BrowserRouter>
+      <BrowserRouter>
+        <Header
+          innerRef={this.myRef}
+          chCurr={this.changeCurr}
+          curr={this.currOpen}
+          {...this.state}
+          {...this.props}
+        />
+        <Routes>
+          <Route path="/" element={<Redirect />} />
+          <Route
+            path="/:category"
+            element={
+              <ProductList
+                handleProduct={this.handleProduct}
+                {...this.state}
+                price={this.getPrice}
+                click={this.handleClick}
+              />
+            }
+          />
+          <Route
+            path="/product/:product"
+            element={
+              <ProductDisplay
+                handleAdd={this.handleAdd}
+                chPict={this.chPict}
+                price={this.getPrice}
+                {...this.state}
+                handleProduct={this.handleProduct}
+              />
+            }
+          />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
+      </BrowserRouter>
     );
   }
 }
@@ -132,7 +144,7 @@ const mapStateToProps = (state) => {
   return {
     categories: state.categories,
     items: state.items,
-    cart: state.cart
+    cart: state.cart,
   };
 };
 
@@ -143,7 +155,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     addToCart: (obj) => {
       dispatch(addToCart(obj));
-    }
+    },
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,7 +1,7 @@
 import { ADD_TO_CART , ADD_TO_CATEGORIES} from "../actions/cartActions";
 
 const initState = {
-  items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  items: [],
   categories: ['all'],
   addItems: [],
   total: [],
