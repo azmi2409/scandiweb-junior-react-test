@@ -1,11 +1,11 @@
-import { ADD_TO_CART , ADD_TO_CATEGORIES} from "../actions/cartActions";
+import { ADD_TO_CART , ADD_TO_CATEGORIES, CHANGE_CURRENCY , ADD_CURRENCIES} from "../actions/cartActions";
 
 const initState = {
-  items: [],
   categories: ['all'],
-  addItems: [],
-  total: [],
-  cart: []
+  cart: [],
+  currencies: [],
+  currency: '$'
+
 };
 
 const cartReducer = (state = initState, action) => {
@@ -23,6 +23,8 @@ const cartReducer = (state = initState, action) => {
     return {...state, cart: [...state.cart, action.obj]};
     }
     case ADD_TO_CATEGORIES: return { ...state, categories: action.categories };
+    case CHANGE_CURRENCY: return { ...state, currency: action.currency };
+    case ADD_CURRENCIES: return { ...state, currencies: action.currencies };
     default:
       return state;
   }

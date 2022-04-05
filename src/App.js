@@ -4,7 +4,7 @@ import Cart from "./components/Cart/Cart";
 import ProductList from "./components/ProductList/ProductList";
 import Header from "./components/Header/Header";
 import { connect } from "react-redux";
-import { addToCategories, addToCart } from "./lib/actions/cartActions";
+import { addToCategories, addToCart , changeCurrency , addCurrencies } from "./lib/actions/cartActions";
 import ProductDisplay from "./components/ProductDisplay/ProductDisplay";
 import {
   getCategory,
@@ -30,15 +30,13 @@ class App extends Component {
       selected: "all",
       products: [],
       product: "",
-      currencies: [],
-      currency: "$",
       isCartOpen: false,
       isCurrencyOpen: false,
     };
   }
 
   changeCurr(currency) {
-    this.setState({ currency });
+    this.props.changeCurrency(currency);
     this.currOpen();
   }
 
@@ -75,12 +73,11 @@ class App extends Component {
   handleAdd = (item) => {
     const obj = { ...item };
     this.props.addToCart(obj);
-    console.log('add Obj', this.props.cart);
   };
 
   getPrice = (prices) => {
     const index = prices.findIndex(
-      (v) => v.currency.symbol === this.state.currency
+      (v) => v.currency.symbol === this.props.currency
     );
     return prices[index].currency.symbol + prices[index].amount;
   };
@@ -95,7 +92,7 @@ class App extends Component {
       this.props.addToCategories(arr);
     });
     getCurrencies().then((data) => {
-      this.setState({ currencies: data });
+      this.props.addCurrencies(data);
     });
   }
   render() {
@@ -116,6 +113,7 @@ class App extends Component {
               <ProductList
                 handleProduct={this.handleProduct}
                 {...this.state}
+                {...this.props}
                 price={this.getPrice}
                 click={this.handleClick}
               />
@@ -129,6 +127,7 @@ class App extends Component {
                 chPict={this.chPict}
                 price={this.getPrice}
                 {...this.state}
+                {...this.props}
                 handleProduct={this.handleProduct}
               />
             }
@@ -145,6 +144,8 @@ const mapStateToProps = (state) => {
     categories: state.categories,
     items: state.items,
     cart: state.cart,
+    currency: state.currency,
+    currencies: state.currencies,
   };
 };
 
@@ -156,6 +157,13 @@ const mapDispatchToProps = (dispatch) => {
     addToCart: (obj) => {
       dispatch(addToCart(obj));
     },
+    changeCurrency: (currency) => {
+      dispatch(changeCurrency(currency));
+    },
+    addCurrencies: (currencies) => {
+      dispatch(addCurrencies(currencies));
+    },
+
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);
