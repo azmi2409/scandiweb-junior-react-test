@@ -132,7 +132,7 @@ class App extends Component {
               />
             }
           />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/cart" element={<Cart {...this.props} price={this.getPrice}/>} />
         </Routes>
       </BrowserRouter>
     );

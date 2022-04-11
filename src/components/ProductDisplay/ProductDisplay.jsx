@@ -55,10 +55,12 @@ class ProductDisplay extends Component {
     const checked = this.validateProps();
     if (checked) {
       const newItems = {
-        ...this.state.properties,
+        properties: this.state.properties,
         id: this.props.params.product,
         name: this.props.product.name,
+        brand: this.props.product.brand,
         price: this.props.product.prices,
+        attributes: this.props.product.attributes,
         quantity: 1,
         image: this.props.product.gallery[0],
       };
@@ -82,7 +84,8 @@ class ProductDisplay extends Component {
   Type = (type, val, name) => {
     if (type === "swatch") {
       return (
-        <Swatch key={val}
+        <Swatch
+          key={val}
           onClick={() => this.addProps(val, name)}
           color={val}
           selected={this.checkProps(name, val)}
@@ -90,7 +93,8 @@ class ProductDisplay extends Component {
       );
     }
     return (
-      <Properties key={val}
+      <Properties
+        key={val}
         onClick={() => this.addProps(val, name)}
         selected={this.checkProps(name, val)}
       >
@@ -134,9 +138,7 @@ class ProductDisplay extends Component {
                 <React.Fragment key={i}>
                   <AttrName key={v.name}>{v.name}</AttrName>
                   <AttrType key={v.type}>
-                    {v.items.map((val) =>
-                      this.Type(v.type, val.value, v.name)
-                    )}
+                    {v.items.map((val) => this.Type(v.type, val.value, v.name))}
                   </AttrType>
                 </React.Fragment>
               ))}

@@ -1,6 +1,6 @@
 # Scandiweb Junior React Assignment
 
-Hi! This Repo is made for joining Entry React Developer Test for [Scandiweb](https://scandiweb.com)
+Hi! This Repo is made to join Entry React Developer Test for [Scandiweb](https://scandiweb.com)
 
 **Live Demo** : [Click Here](https://scandiweb.azmi.web.id)
 
@@ -11,3 +11,4 @@ Hi! This Repo is made for joining Entry React Developer Test for [Scandiweb](htt
 - [Redux-Persist](https://github.com/rt2zz/redux-persist) (Persist Redux State on your PC)
 - [Styled-Component](https://github.com/styled-components/styled-components) (CSS in JS Styling)
 - [GraphQL-Request](https://www.npmjs.com/package/graphql-request) (Create Request to GraphQL Server)
+- [React-Router-Dom](https://www.npmjs.com/package/react-router-dom) (in App Routing *actually i used wrapper for working with class component)
