@@ -40,15 +40,12 @@ export const Overlay = styled.div`
   opacity: 0.5;
   display: flex;
   font-weight: 400;
-  font-size: 1.5em;
+  font-size: 24px;
   text-transform: uppercase;
   align-items: center;
   justify-content: center;
   color: #8d8f9a;
-  z-index: 1000;
-  :hover {
-    opacity: 1;
-  }
+  z-index: 2;
 `;
 
 export const CartLogo = styled.div`
@@ -62,28 +59,30 @@ export const CartLogo = styled.div`
   cursor: pointer;
   display: none;
   transform: translateY(60%);
+
   ${Card}:hover & {
     display: flex;
   }
 `;
 
 export const CategoryName = styled.h1`
-  font-size: 2em;
+  font-size: 42px;
+  line-height: 160%;
   font-weight: 400;
-  margin: 0.5em 1em;
+  margin: 0 1em;
   text-transform: capitalize;
 `;
 
 export const ImgWrapper = styled.div`
   position: relative;
-  width: 100%;
-  height: 360px;
+  width: 356px;
+  height: 338px;
 `;
 
 export const ImgHero = styled.img`
   width: 100%;
   object-fit: contain;
-  max-height: 360px;
+  max-height: 338px;
 `;
 
 export const PriceWrapper = styled.div`
@@ -96,6 +95,12 @@ export const PriceWrapper = styled.div`
 `;
 
 export const PriceTag = styled.span`
-  font-size: 1em;
+  font-size: 18px;
   font-weight: ${(props) => (props.weight ? props.weight : "400")};
+  `;
+
+export const Main = styled.div`
+  margin: 0;
+  padding: 0;
+  position: relative;
   `;

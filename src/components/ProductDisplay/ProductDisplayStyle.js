@@ -59,13 +59,14 @@ export const Properties = styled.button`
   align-items: center;
   justify-content: center;
   border: 1px solid #1D1F22;
+  box-sizing: border-box
   cursor: pointer;
   font-weight: 400;
   ${(props) => props.selected && `background: #1D1F22; color: white;`}
 `;
 
 export const Galleries = styled.img`
-  max-height: 100px;
+  max-height: 88px;
   margin-top: 0.5em;
   cursor: pointer;
 `;
@@ -75,14 +76,16 @@ export const Gallery = styled.img`
 `;
 
 export const Brand = styled.h2`
-  font-size: 1.5em;
+  font-size: 30px;
   font-weight: 600;
+  line-height: 27px;
   margin: 0.5em 0;
 `;
 
 export const Item  = styled.h3`
-  font-size: 1.5em;
+  font-size: 30px;
   font-weight: 400;
+  line-height: 27px;
   margin: 0.5em 0;
 `;
 
@@ -94,10 +97,20 @@ align-items: flex-start;
 `;
 
 export const AttrName = styled.h4`
-  font-size: 1.2em;
+  font-size: 18px;
   font-weight: 700;
+  line-height: 18px;
+  margin: 0.5em 0;
+  font-family: 'Roboto Condensed'
+`;
+
+export const AttrPrice = styled.h4`
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 18px;
   margin: 0.5em 0;
 `;
+
 
 export const AttrType = styled.div`
   display: flex;
@@ -113,21 +126,33 @@ export const ButtonWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2em 0;
   width: 75%;
 `;
 
 export const Submit = styled.button`
-  width: 100%;
-  padding: 1em;
+  width: 292px;
+  height: 52px;
+  padding: 16px 32px;
   background: #5ECE7B;
   color: white;
   border: none;
   cursor: pointer;
   font-weight: 600;
-  font-size: 1em;
+  font-size: 16px;
+  margin: 1em 0;
+  transition: all 200ms ease-in-out;
+  :active {
+    transform: scale(0.95);
+  }
   `;
 
 export const ProductDesc = styled.div`
-  width: 75%;
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 159.96%;
+width: 292px;
+height: 103px;
+color: #1D1F22;
 `;

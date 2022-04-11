@@ -9,6 +9,7 @@ import {
   NavMenu,
   CartNumber,
   Currency,
+  ArrowImg
 } from "./HeaderStyle";
 import { Link } from "react-router-dom";
 import Brand from "../../assets/Brand.svg";
@@ -17,7 +18,7 @@ import Arrow from "../../assets/Arrow.svg";
 
 export default class Header extends Component {
   render() {
-    const { categories, currencies, isCurrencyOpen, curr, chCurr, cart } =
+    const { categories, currencies, isCurrencyOpen, curr, chCurr, cart, handleCart } =
       this.props;
     return (
       <Container>
@@ -35,15 +36,15 @@ export default class Header extends Component {
           <img src={Brand} alt="Brand" />
         </NavBrand>
         <NavMenus>
-          <NavMenu ref={this.props.innerRef} onClick={curr}>
+          <NavMenu onClick={curr}>
             <p style={{ marginRight: "0.2em" }}>{this.props.currency}</p>
-            <img
-              className={isCurrencyOpen ? "rotate" : ""}
+            <ArrowImg
+              rotate={isCurrencyOpen ? true : false}
               src={Arrow}
               alt="Arrow"
             />
             {isCurrencyOpen && (
-              <Currency onClick={(e) => e.stopPropagation()}>
+              <Currency ref={this.props.innerRef}>
                 <ul style={{ listStyle: "none", padding: "0.8em" }}>
                   {currencies
                     .filter((v) => v.symbol !== this.props.currency)
@@ -58,7 +59,7 @@ export default class Header extends Component {
               </Currency>
             )}
           </NavMenu>
-          <NavMenu>
+          <NavMenu onClick={handleCart}>
             <img src={Cart} style={{ position: "relative" }} alt="Cart" />
             {cart.length > 0 && <CartNumber>{cart.length}</CartNumber>}
           </NavMenu>

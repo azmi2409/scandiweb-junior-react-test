@@ -1,5 +1,6 @@
 import { request, gql } from "graphql-request";
 import { useParams } from "react-router-dom";
+import { addToCategories,addToCart,changeCurrency,addCurrencies } from "../actions/cartActions";
 
 export function withParams(Component) {
   return (props) => <Component {...props} params={useParams()} />;
@@ -89,4 +90,32 @@ export const getProduct = async (product) => {
 
 export const createMarkup = (html) => {
   return { __html: html };
+};
+
+export const mapStateToProps = (state) => {
+  return {
+    categories: state.categories,
+    items: state.items,
+    cart: state.cart,
+    currency: state.currency,
+    currencies: state.currencies,
+  };
+};
+
+export const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCategories: (categories) => {
+      dispatch(addToCategories(categories));
+    },
+    addToCart: (obj) => {
+      dispatch(addToCart(obj));
+    },
+    changeCurrency: (currency) => {
+      dispatch(changeCurrency(currency));
+    },
+    addCurrencies: (currencies) => {
+      dispatch(addCurrencies(currencies));
+    },
+
+  };
 };

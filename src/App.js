@@ -4,28 +4,25 @@ import Cart from "./components/Cart/Cart";
 import ProductList from "./components/ProductList/ProductList";
 import Header from "./components/Header/Header";
 import { connect } from "react-redux";
-import { addToCategories, addToCart , changeCurrency , addCurrencies } from "./lib/actions/cartActions";
 import ProductDisplay from "./components/ProductDisplay/ProductDisplay";
 import {
   getCategory,
   getProduct,
   getCategories,
   getCurrencies,
+  mapStateToProps,
+  mapDispatchToProps
 } from "./lib/helpers/";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import CartOverlay from "./components/Cart/CartOverlay";
+import { Main } from "./components/ProductList/ProductListStyle";
 import "./lib/main.css";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleProduct = this.handleProduct.bind(this);
-    this.handleAdd = this.handleAdd.bind(this);
-    this.getPrice = this.getPrice.bind(this);
-    this.currOpen = this.currOpen.bind(this);
-    this.handleOutsideClick = this.handleOutsideClick.bind(this);
-    this.changeCurr = this.changeCurr.bind(this);
     this.myRef = React.createRef();
+    this.cartRef = React.createRef();
     this.state = {
       selected: "all",
       products: [],
@@ -35,12 +32,16 @@ class App extends Component {
     };
   }
 
+  handleCart = () => {
+    this.setState({ isCartOpen: !this.state.isCartOpen });
+  };
+
   changeCurr(currency) {
     this.props.changeCurrency(currency);
     this.currOpen();
   }
 
-  currOpen = () => {
+  currOpen = (e) => {
     this.setState((state) => ({
       ...state,
       isCurrencyOpen: !state.isCurrencyOpen,
@@ -50,6 +51,7 @@ class App extends Component {
     } else {
       document.removeEventListener("click", this.handleOutsideClick, false);
     }
+    e.stopPropagation();
   };
 
   handleProduct = async (product) => {
@@ -102,9 +104,12 @@ class App extends Component {
           innerRef={this.myRef}
           chCurr={this.changeCurr}
           curr={this.currOpen}
+          handleCart={this.handleCart}
           {...this.state}
           {...this.props}
         />
+        <Main>
+        {this.state.isCartOpen && <CartOverlay />}
         <Routes>
           <Route path="/" element={<Redirect />} />
           <Route
@@ -134,36 +139,10 @@ class App extends Component {
           />
           <Route path="/cart" element={<Cart {...this.props} price={this.getPrice}/>} />
         </Routes>
+        </Main>
       </BrowserRouter>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    categories: state.categories,
-    items: state.items,
-    cart: state.cart,
-    currency: state.currency,
-    currencies: state.currencies,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addToCategories: (categories) => {
-      dispatch(addToCategories(categories));
-    },
-    addToCart: (obj) => {
-      dispatch(addToCart(obj));
-    },
-    changeCurrency: (currency) => {
-      dispatch(changeCurrency(currency));
-    },
-    addCurrencies: (currencies) => {
-      dispatch(addCurrencies(currencies));
-    },
-
-  };
-};
 export default connect(mapStateToProps, mapDispatchToProps)(App);

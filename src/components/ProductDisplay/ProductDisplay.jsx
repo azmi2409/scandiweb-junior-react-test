@@ -15,6 +15,7 @@ import {
   ButtonWrapper,
   Submit,
   ProductDesc,
+  AttrPrice
 } from "./ProductDisplayStyle";
 import React, { Component } from "react";
 import { withParams, createMarkup } from "../../lib/helpers/";
@@ -144,10 +145,8 @@ class ProductDisplay extends Component {
               ))}
             </Attributes>
             <AttrName>Price:</AttrName>
-            <AttrName>{price(product.prices)}</AttrName>
-            <ButtonWrapper>
+            <AttrPrice>{price(product.prices)}</AttrPrice>
               <Submit onClick={this.handleAddCart}>ADD TO CART</Submit>
-            </ButtonWrapper>
             <ProductDesc
               dangerouslySetInnerHTML={createMarkup(product.description)}
             />

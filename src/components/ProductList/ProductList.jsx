@@ -42,11 +42,11 @@ class ProductList extends Component {
               <Card key={i}>
                 <ImgWrapper>
                   <ImgHero loading="lazy" src={v.gallery[0]} alt="Product" />
-                  <CartLogo>
+                  {v.inStock && (<CartLogo>
                     <Link to={`/product/${v.id}`}>
                       <img src={CartCirle} alt="add to cart" />
                     </Link>
-                  </CartLogo>
+                  </CartLogo>)}
                 </ImgWrapper>
                 <PriceWrapper>
                   <PriceTag weight={300}>{v.name}</PriceTag>
