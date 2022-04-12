@@ -18,7 +18,7 @@ export const NavLink = styled.ul`
 `;
 
 export const NavItem = styled.li`
-  margin: 0 1rem;
+  margin: 0 1em;
   text-transform: uppercase;
   cursor: pointer;
   font-weight: 400;
@@ -31,7 +31,7 @@ export const NavItem = styled.li`
     props.active &&
     `border-bottom: 2px solid #5ECE7B;
     color: #5ECE7B;
-    font-wight: 600;`}
+    font-weight: 600;`}
 `;
 
 export const NavCategory = styled.div`
@@ -89,15 +89,17 @@ export const CartNumber = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  height: 1.5em;
-  width: 1.5em;
-  font-size: 0.9em;
-  padding: 0.3em;
+  height: 20px;
+  width: 20px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Roboto Condensed';
   background: #1d1f22;
   color: white;
   border-radius: 50%;
   z-index: 2000;
-  transform: translateY(20%);
+  margin-top: 0.8em;
+  margin-right: 0.2em;
 `;
 
 export const ArrowImg = styled.img`

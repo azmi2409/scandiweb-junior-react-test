@@ -53,12 +53,18 @@ export const CartLogo = styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
-  padding: 0.5em;
-  max-width: 100%;
-  max-height: 20rem;
+  padding: 0;
+  max-width: 52px;
+  max-height: 52px;
   cursor: pointer;
   display: none;
-  transform: translateY(60%);
+  margin-right: 27px;
+  transform: translateY(50%);
+  
+  :active {
+    transform: scale(0.95);
+    transform: translateY(50%);
+  }
 
   ${Card}:hover & {
     display: flex;

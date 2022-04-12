@@ -150,21 +150,22 @@ export const MiniCartContainer = styled.div`
   background: #ffffff;
   height: 540px;
   width: 325px;
-  padding: 0 1em;   
+  padding: 0 1em;
+  flex-direction: column;
 `;
 
 export const MiniCartHeader = styled.h2`
+display: flex;
+flex-direction: rows;
 font-weight: 700;
 font-size: 16px;
 line-height: 160%;
+width: 100%;
 `;
 
 export const MiniCartItems = styled.div`
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-justify-content: space-between;
-align-items: center;
+display: grid;
+grid-template-columns: 1fr 1fr;
 width: 100%;
 `;
 

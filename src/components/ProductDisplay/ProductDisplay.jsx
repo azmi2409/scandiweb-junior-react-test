@@ -12,7 +12,6 @@ import {
   Attributes,
   AttrName,
   AttrType,
-  ButtonWrapper,
   Submit,
   ProductDesc,
   AttrPrice

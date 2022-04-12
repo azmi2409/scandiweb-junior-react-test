@@ -9,8 +9,7 @@ class MiniCart extends Component {
     return (
       <MiniCartContainer>
         <MiniCartHeader>
-          My Bag
-          <span style={{ fontWeight: 500 }}>{`, ${cart.length} Items`}</span>
+          My Bag<span style={{ fontWeight: 500 }}>{`, ${cart.length} Items`}</span>
         </MiniCartHeader>
         <MiniCartItems>
           {cart.map((item, index) => {

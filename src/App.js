@@ -11,7 +11,7 @@ import {
   getCategories,
   getCurrencies,
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 } from "./lib/helpers/";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CartOverlay from "./components/Cart/CartOverlay";
@@ -21,6 +21,7 @@ import "./lib/main.css";
 class App extends Component {
   constructor(props) {
     super(props);
+    this.changeCurr = this.changeCurr.bind(this);
     this.myRef = React.createRef();
     this.cartRef = React.createRef();
     this.state = {
@@ -38,10 +39,9 @@ class App extends Component {
 
   changeCurr(currency) {
     this.props.changeCurrency(currency);
-    this.currOpen();
   }
 
-  currOpen = (e) => {
+  currOpen = () => {
     this.setState((state) => ({
       ...state,
       isCurrencyOpen: !state.isCurrencyOpen,
@@ -51,7 +51,6 @@ class App extends Component {
     } else {
       document.removeEventListener("click", this.handleOutsideClick, false);
     }
-    e.stopPropagation();
   };
 
   handleProduct = async (product) => {
@@ -65,11 +64,11 @@ class App extends Component {
   };
 
   handleOutsideClick = (e) => {
-    if (this.myRef.current) {
+    if(this.myRef.current){
       if (this.myRef.current && !this.myRef.current.contains(e.target)) {
         this.currOpen();
-      }
     }
+  }
   };
 
   handleAdd = (item) => {
@@ -102,6 +101,7 @@ class App extends Component {
       <BrowserRouter>
         <Header
           innerRef={this.myRef}
+          curRef={this.cartRef}
           chCurr={this.changeCurr}
           curr={this.currOpen}
           handleCart={this.handleCart}
@@ -109,36 +109,39 @@ class App extends Component {
           {...this.props}
         />
         <Main>
-        {this.state.isCartOpen && <CartOverlay />}
-        <Routes>
-          <Route path="/" element={<Redirect />} />
-          <Route
-            path="/:category"
-            element={
-              <ProductList
-                handleProduct={this.handleProduct}
-                {...this.state}
-                {...this.props}
-                price={this.getPrice}
-                click={this.handleClick}
-              />
-            }
-          />
-          <Route
-            path="/product/:product"
-            element={
-              <ProductDisplay
-                handleAdd={this.handleAdd}
-                chPict={this.chPict}
-                price={this.getPrice}
-                {...this.state}
-                {...this.props}
-                handleProduct={this.handleProduct}
-              />
-            }
-          />
-          <Route path="/cart" element={<Cart {...this.props} price={this.getPrice}/>} />
-        </Routes>
+          {this.state.isCartOpen && <CartOverlay />}
+          <Routes>
+            <Route path="/" element={<Redirect />} />
+            <Route
+              path="/:category"
+              element={
+                <ProductList
+                  handleProduct={this.handleProduct}
+                  {...this.state}
+                  {...this.props}
+                  price={this.getPrice}
+                  click={this.handleClick}
+                />
+              }
+            />
+            <Route
+              path="/product/:product"
+              element={
+                <ProductDisplay
+                  handleAdd={this.handleAdd}
+                  chPict={this.chPict}
+                  price={this.getPrice}
+                  {...this.state}
+                  {...this.props}
+                  handleProduct={this.handleProduct}
+                />
+              }
+            />
+            <Route
+              path="/cart"
+              element={<Cart {...this.props} price={this.getPrice} />}
+            />
+          </Routes>
         </Main>
       </BrowserRouter>
     );

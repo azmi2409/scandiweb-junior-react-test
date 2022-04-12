@@ -36,15 +36,15 @@ export default class Header extends Component {
           <img src={Brand} alt="Brand" />
         </NavBrand>
         <NavMenus>
-          <NavMenu onClick={curr}>
-            <p style={{ marginRight: "0.2em" }}>{this.props.currency}</p>
+          <NavMenu ref={this.props.innerRef} onClick={curr}>
+            <p style={{ marginRight: "0.1em",fontWeight: 500,fontSize: 18,lineHeight: '160%' }}>{this.props.currency}</p>
             <ArrowImg
               rotate={isCurrencyOpen ? true : false}
               src={Arrow}
               alt="Arrow"
             />
             {isCurrencyOpen && (
-              <Currency ref={this.props.innerRef}>
+              <Currency ref={this.props.curRef}>
                 <ul style={{ listStyle: "none", padding: "0.8em" }}>
                   {currencies
                     .filter((v) => v.symbol !== this.props.currency)

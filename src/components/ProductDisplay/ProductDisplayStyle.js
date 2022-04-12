@@ -15,7 +15,7 @@ export const SidePict = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 1em 2em;
-  height: 70vh;
+  height: 520px;
   overflow: scroll;
   scrollbar-width: none;
 
@@ -30,25 +30,28 @@ export const Description = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   padding: 1em;
+  height: 520px;
 `;
 
 export const MainPict = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 70vh;
+  height: 520px;
   justify-content: flex-start;
   align-items: center;
   padding: 1em 2em;
 `;
 
 export const Swatch = styled.div`
+  display: flex;
   height: 45px;
-  width: 45px;
-  border-radius: 50%;
+  width: 63px;
+  border: 1px solid #1D1F22;
+  box-sizing: border-box
   cursor: pointer;
   background-color: ${(props) => props.color};
-  ${(props) => props.selected && "border: 2px solid #1D1F22;"}
+  ${(props) => props.selected && `border: 4px solid #1D1F22;`}
 `;
 
 export const Properties = styled.button`
@@ -72,7 +75,7 @@ export const Galleries = styled.img`
 `;
 
 export const Gallery = styled.img`
-  max-height: 100%;
+  height: 100%;
 `;
 
 export const Brand = styled.h2`
