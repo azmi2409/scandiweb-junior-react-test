@@ -5,14 +5,7 @@ import ProductList from "./components/ProductList/ProductList";
 import Header from "./components/Header/Header";
 import { connect } from "react-redux";
 import ProductDisplay from "./components/ProductDisplay/ProductDisplay";
-import {
-  getCategory,
-  getProduct,
-  getCategories,
-  getCurrencies,
-  mapStateToProps,
-  mapDispatchToProps,
-} from "./lib/helpers/";
+import { mapStateToProps, mapDispatchToProps } from "./lib/helpers/";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CartOverlay from "./components/Cart/CartOverlay";
 import { Main } from "./components/ProductList/ProductListStyle";
@@ -24,17 +17,10 @@ class App extends Component {
     this.changeCurr = this.changeCurr.bind(this);
     this.myRef = React.createRef();
     this.cartRef = React.createRef();
-    this.state = {
-      selected: "all",
-      products: [],
-      product: "",
-      isCartOpen: false,
-      isCurrencyOpen: false,
-    };
   }
 
   handleCart = () => {
-    this.setState({ isCartOpen: !this.state.isCartOpen });
+    this.props.toggleCart();
   };
 
   changeCurr(currency) {
@@ -42,11 +28,8 @@ class App extends Component {
   }
 
   currOpen = () => {
-    this.setState((state) => ({
-      ...state,
-      isCurrencyOpen: !state.isCurrencyOpen,
-    }));
-    if (!this.state.isCurrencyOpen) {
+    this.props.toggleCurrencies();
+    if (!this.props.isCurrencyOpen) {
       document.addEventListener("click", this.handleOutsideClick, false);
     } else {
       document.removeEventListener("click", this.handleOutsideClick, false);
@@ -54,21 +37,19 @@ class App extends Component {
   };
 
   handleProduct = async (product) => {
-    const data = await getProduct(product);
-    this.setState({ product: data });
+    this.props.loadProduct(product);
   };
 
   handleClick = async (category) => {
-    const data = await getCategory(category);
-    this.setState({ selected: category, products: data });
+    this.props.loadCategory(category);
   };
 
   handleOutsideClick = (e) => {
-    if(this.myRef.current){
+    if (this.myRef.current) {
       if (this.myRef.current && !this.myRef.current.contains(e.target)) {
         this.currOpen();
+      }
     }
-  }
   };
 
   handleAdd = (item) => {
@@ -84,17 +65,8 @@ class App extends Component {
   };
 
   componentDidMount() {
-    getCategories().then((data) => {
-      this.setState({ categories: data });
-      const arr = data.reduce((acc, v) => {
-        acc = [...acc, v.name];
-        return acc;
-      }, []);
-      this.props.addToCategories(arr);
-    });
-    getCurrencies().then((data) => {
-      this.props.addCurrencies(data);
-    });
+    this.props.loadCategories();
+    this.props.loadCurrencies();
   }
   render() {
     return (
@@ -105,11 +77,10 @@ class App extends Component {
           chCurr={this.changeCurr}
           curr={this.currOpen}
           handleCart={this.handleCart}
-          {...this.state}
           {...this.props}
         />
         <Main>
-          {this.state.isCartOpen && <CartOverlay />}
+          {this.props.isCartOpen && <CartOverlay />}
           <Routes>
             <Route path="/" element={<Redirect />} />
             <Route
@@ -117,7 +88,6 @@ class App extends Component {
               element={
                 <ProductList
                   handleProduct={this.handleProduct}
-                  {...this.state}
                   {...this.props}
                   price={this.getPrice}
                   click={this.handleClick}
@@ -131,7 +101,6 @@ class App extends Component {
                   handleAdd={this.handleAdd}
                   chPict={this.chPict}
                   price={this.getPrice}
-                  {...this.state}
                   {...this.props}
                   handleProduct={this.handleProduct}
                 />

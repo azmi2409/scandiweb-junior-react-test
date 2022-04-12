@@ -109,7 +109,7 @@ class ProductDisplay extends Component {
     return (
       <Container>
         <SidePict>
-          {product &&
+          {product && product.gallery &&
             product.gallery.map((v, i) => (
               <Galleries
                 loading="lazy"
@@ -121,7 +121,7 @@ class ProductDisplay extends Component {
             ))}
         </SidePict>
         <MainPict>
-          {product && (
+          {product && product.gallery && (
             <Gallery
               loading="lazy"
               src={product.gallery[pictIndex]}
@@ -134,7 +134,7 @@ class ProductDisplay extends Component {
             <Brand>{product.brand}</Brand>
             <Item>{product.name}</Item>
             <Attributes>
-              {product.attributes.map((v, i) => (
+              {product.attributes?.map((v, i) => (
                 <React.Fragment key={i}>
                   <AttrName key={v.name}>{v.name}</AttrName>
                   <AttrType key={v.type}>

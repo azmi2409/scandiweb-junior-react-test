@@ -1,6 +1,16 @@
 import { request, gql } from "graphql-request";
 import { useParams } from "react-router-dom";
-import { addToCategories,addToCart,changeCurrency,addCurrencies } from "../actions/cartActions";
+import {
+  addToCategories,
+  addToCart,
+  changeCurrency,
+  addCurrencies,
+  setCategory,
+  toggleCart,
+  toggleCurrencies,
+  setProduct,
+  setProducts,
+} from "../actions/cartActions";
 
 export function withParams(Component) {
   return (props) => <Component {...props} params={useParams()} />;
@@ -24,10 +34,10 @@ export const getCurrencies = async () => {
   const CURRENCY_QUERY = gql`
     {
       currencies {
-          label
-          symbol
+        label
+        symbol
+      }
     }
-  }
   `;
   const res = await request(endpoint, CURRENCY_QUERY);
   return res.currencies;
@@ -99,6 +109,11 @@ export const mapStateToProps = (state) => {
     cart: state.cart,
     currency: state.currency,
     currencies: state.currencies,
+    isCartOpen: state.isCartOpen,
+    isCurrencyOpen: state.isCurrenciesOpen,
+    selected: state.category,
+    product: state.product,
+    products: state.products,
   };
 };
 
@@ -116,6 +131,62 @@ export const mapDispatchToProps = (dispatch) => {
     addCurrencies: (currencies) => {
       dispatch(addCurrencies(currencies));
     },
-
+    setCategory: (category) => {
+      dispatch(setCategory(category));
+    },
+    toggleCart: () => {
+      dispatch(toggleCart());
+    },
+    toggleCurrencies: () => {
+      dispatch(toggleCurrencies());
+    },
+    setProduct: (product) => {
+      dispatch(setProduct(product));
+    },
+    setProducts: (products) => {
+      dispatch(setProducts(products));
+    },
+    loadCategories: () => {
+      loadCategories(dispatch);
+    },
+    loadCurrencies: () => {
+      loadCurrencies(dispatch);
+    },
+    loadCategory: (category) => {
+      loadCategory(dispatch, category);
+    },
+    loadProduct: (product) => {
+      loadProduct(dispatch, product);
+    },
   };
 };
+
+function loadCategories(dispatch) {
+  getCategories().then((data) => {
+    const arr = data.reduce((acc, v) => {
+      acc = [...acc, v.name];
+      return acc;
+    }, []);
+    dispatch(addToCategories(arr));
+  });
+}
+function loadCurrencies(dispatch) {
+  getCurrencies().then((data) => {
+    dispatch(addCurrencies(data));
+  });
+}
+/*function loadProducts(dispatch, category) {
+  getCategory(category).then((data) => {
+    dispatch(setProducts(data));
+  });
+}*/
+async function loadCategory(dispatch, category) {
+  dispatch(setCategory(category));
+  const data = await getCategory(category);
+  dispatch(setProducts(data));
+}
+function loadProduct(dispatch, product) {
+  getProduct(product).then((data) => {
+    dispatch(setProduct(data));
+  });
+}
