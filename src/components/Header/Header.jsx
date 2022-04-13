@@ -39,7 +39,7 @@ export default class Header extends Component {
           <NavMenu ref={this.props.innerRef} onClick={curr}>
             <p style={{ marginRight: "0.1em",fontWeight: 500,fontSize: 18,lineHeight: '160%' }}>{this.props.currency}</p>
             <ArrowImg
-              rotate={isCurrencyOpen ? true : false}
+              rotate={isCurrencyOpen ? 'true' : ''}
               src={Arrow}
               alt="Arrow"
             />

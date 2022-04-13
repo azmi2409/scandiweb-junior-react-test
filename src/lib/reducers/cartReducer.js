@@ -14,7 +14,7 @@ const initState = {
   categories: ["all"],
   category: "all",
   products: [],
-  product: {},
+  product: "",
   cart: [],
   currencies: [],
   currency: "$",

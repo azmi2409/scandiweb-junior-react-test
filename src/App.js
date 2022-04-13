@@ -15,6 +15,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.changeCurr = this.changeCurr.bind(this);
+    this.handleProduct = this.handleProduct.bind(this)
     this.myRef = React.createRef();
     this.cartRef = React.createRef();
   }
@@ -37,6 +38,7 @@ class App extends Component {
   };
 
   handleProduct = async (product) => {
+    console.log('handleProduct',product)
     this.props.loadProduct(product);
   };
 
@@ -59,7 +61,7 @@ class App extends Component {
 
   getPrice = (prices) => {
     const index = prices.findIndex(
-      (v) => v.currency.symbol === this.props.currencies
+      (v) => v.currency.symbol === this.props.currency
     );
     return prices[index].currency.symbol + prices[index].amount;
   };
