@@ -59,7 +59,7 @@ class App extends Component {
 
   getPrice = (prices) => {
     const index = prices.findIndex(
-      (v) => v.currency.symbol === this.props.currency
+      (v) => v.currency.symbol === this.props.currencies
     );
     return prices[index].currency.symbol + prices[index].amount;
   };
