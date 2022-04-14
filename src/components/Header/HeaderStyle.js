@@ -5,7 +5,7 @@ export const Container = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   max-height: 80px;
   max-width: 1440px;
-  padding: 0.5em 3em;
+  padding: 0 3em;
   margin: 0 0.5em;
 `;
 
@@ -53,6 +53,7 @@ export const NavMenus = styled.div`
   justify-content: flex-end;
   cursor: pointer;
   position: relative;
+  gap: 0.5em;
 `;
 
 export const NavMenu = styled.div`

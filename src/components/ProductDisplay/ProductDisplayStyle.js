@@ -4,8 +4,8 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: 2fr 10fr 8fr 1fr;
   grid-gap: 1em;
-  padding: 1em 2em;
-  margin: 1em 2em;
+  padding: 2em 2em;
+  margin: 0 2em;
   max-width: 100%;
 `;
 

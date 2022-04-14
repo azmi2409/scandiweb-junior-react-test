@@ -7,7 +7,7 @@ export default class CartOverlay extends Component {
   render() {
     return (
       <Overlay>
-          <OutsideWrapper action={this.props.toggleCart}>
+          <OutsideWrapper styles={{marginRight: 87,maxHeight: 540}} parentRef={this.props.cartRef} action={this.props.toggleCart}>
           <MiniCart {...this.props}/>
           </OutsideWrapper>
       </Overlay>

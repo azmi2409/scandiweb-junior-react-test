@@ -12,6 +12,10 @@ import {
   setProducts,
   incCart,
   decCart,
+  closeCart,
+  closeCurrencies,
+  openCart,
+  openCurrencies
 } from "../actions/cartActions";
 
 export function withParams(Component) {
@@ -169,6 +173,18 @@ export const mapDispatchToProps = (dispatch) => {
     decCart: (item) => {
       dispatch(decCart(item));
     },
+    closeCart: () => {
+      dispatch(closeCart());
+    },
+    closeCurrencies: () => {
+      dispatch(closeCurrencies());
+    },
+    openCart: () => {
+      dispatch(openCart());
+    },
+    openCurrencies: () => {
+      dispatch(openCurrencies());
+    },
   };
 };
 
@@ -186,11 +202,6 @@ function loadCurrencies(dispatch) {
     dispatch(addCurrencies(data));
   });
 }
-/*function loadProducts(dispatch, category) {
-  getCategory(category).then((data) => {
-    dispatch(setProducts(data));
-  });
-}*/
 async function loadCategory(dispatch, category) {
   dispatch(setCategory(category));
   const data = await getCategory(category);

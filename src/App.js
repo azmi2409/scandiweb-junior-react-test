@@ -17,6 +17,8 @@ class App extends Component {
     super(props);
     this.changeCurr = this.changeCurr.bind(this);
     this.handleProduct = this.handleProduct.bind(this);
+    this.curRef = React.createRef();
+    this.cartRef = React.createRef();
   }
 
   componentDidMount() {
@@ -64,7 +66,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Header
-          innerRef={this.myRef}
+          curRef={this.curRef}
           cartRef={this.cartRef}
           chCurr={this.changeCurr}
           curr={this.currOpen}
@@ -72,7 +74,7 @@ class App extends Component {
           {...this.props}
         />
         <Main>
-          {this.props.isCartOpen && <CartOverlay price={this.getPrice} {...this.props} />}
+          {this.props.isCartOpen && <CartOverlay cartRef={this.cartRef} price={this.getPrice} {...this.props} />}
           <Routes>
             <Route path="/" element={<Redirect />} />
             <Route

@@ -9,6 +9,10 @@ export const SET_PRODUCT = "SET_PRODUCT";
 export const SET_PRODUCTS = "SET_PRODUCTS";
 export const INC_CART = "INC_CART";
 export const DEC_CART = "DEC_CART";
+export const CLOSE_CART = "CLOSE_CART";
+export const CLOSE_CURRENCIES = "CLOSE_CURRENCIES";
+export const OPEN_CART = "OPEN_CART";
+export const OPEN_CURRENCIES = "OPEN_CURRENCIES";
 
 export const addToCart = (product) => {
   return {
@@ -74,5 +78,28 @@ export const decCart = (product) => {
   return {
     type: DEC_CART,
     product,
+  };
+}
+
+export const closeCart = () => {
+  return {
+    type: CLOSE_CART,
+  };
+}
+
+export const closeCurrencies = () => {
+  return {
+    type: CLOSE_CURRENCIES,
+  };
+}
+
+export const openCart = () => {
+  return {
+    type: OPEN_CART,
+  };
+}
+export const openCurrencies = () => {
+  return {
+    type: OPEN_CURRENCIES,
   };
 }

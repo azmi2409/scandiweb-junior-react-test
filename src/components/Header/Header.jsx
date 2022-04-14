@@ -19,7 +19,7 @@ import OutsideWrapper from "./OutsideWrapper";
 
 export default class Header extends Component {
   render() {
-    const { categories, currencies, isCurrencyOpen, curr, chCurr, cart, handleCart } =
+    const { categories, currencies, isCurrencyOpen, curr, chCurr, cart } =
       this.props;
     return (
       <Container>
@@ -37,7 +37,7 @@ export default class Header extends Component {
           <img src={Brand} alt="Brand" />
         </NavBrand>
         <NavMenus>
-          <NavMenu ref={this.props.innerRef} onClick={curr}>
+          <NavMenu key={'currencies'} ref={this.props.curRef} onClick={curr}>
             <p style={{ marginRight: "0.1em",fontWeight: 500,fontSize: 18,lineHeight: '160%' }}>{this.props.currency}</p>
             <ArrowImg
               rotate={isCurrencyOpen ? 'true' : ''}
@@ -45,7 +45,7 @@ export default class Header extends Component {
               alt="Arrow"
             />
             {isCurrencyOpen && (
-              <OutsideWrapper action={curr}>
+              <OutsideWrapper parentRef={this.props.curRef} action={this.props.closeCurrencies}>
               <Currency onClick={e => e.stopPropagation()}>
                 <ul style={{ listStyle: "none", padding: "0.8em" }}>
                   {currencies
@@ -62,7 +62,7 @@ export default class Header extends Component {
               </OutsideWrapper>
             )}
           </NavMenu>
-          <NavMenu onClick={handleCart}>
+          <NavMenu key={'miniCart'} ref={this.props.cartRef} onClick={this.props.handleCart}>
             <img src={Cart} style={{ position: "relative" }} alt="Cart" />
             {cart.length > 0 && <CartNumber>{cart.length}</CartNumber>}
           </NavMenu>

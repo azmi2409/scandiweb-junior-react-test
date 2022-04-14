@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1em 3em;
-  margin: 1em 0.5em;
+  padding: 2em 3em;
+  margin: 0 0.5em;
   max-width: 100%;
   min-height: 100vh;
 `;
@@ -32,6 +32,7 @@ export const CartContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  min-height: 185px;
   border-top: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
 `;
@@ -49,8 +50,9 @@ export const CartDetails = styled.div`
 export const CartQuantity = styled.div`
   display: flex;
   flex-direction: row;
-  align-self: center;
   height: 100%;
+  align-items: flex-start;
+  gap: 1em;
 `;
 
 export const Quantity = styled.div`
@@ -62,12 +64,13 @@ export const Quantity = styled.div`
   font-weight: 500;
   font-size: 24px;
   line-height: 160%;
-  gap: 0.5em;
+  gap: 1em;
 `;
 
 export const CartFigure = styled.div`
   display: flex;
   height: 100%;
+  position: relative;
 `;
 
 export const CartImg = styled.img`
@@ -107,7 +110,7 @@ export const Brand = styled.h2`
   font-size: 30px;
   font-weight: 600;
   line-height: 27px;
-  padding: 0;
+  margin: 0.3em 0;
 `;
 
 export const Name = styled.h2`
@@ -115,7 +118,7 @@ export const Name = styled.h2`
   font-weight: 400;
   line-height: 27px;
   padding: 0;
-  margin-top: 0;
+  margin: 0.3em 0;
 `;
 
 export const Price = styled.h2`
@@ -123,7 +126,7 @@ export const Price = styled.h2`
   font-weight: 700;
   line-height: 18px;
   padding: 0;
-  margin: 0;
+  margin: 0.8em 0;
 `;
 
 export const Overlay = styled.div`
@@ -170,5 +173,36 @@ justify-content: flex-start;
 align-items: flex-start;
 gap: 1em;
 height: 100%;
-margin: 1.5em 0;
+margin: 1em 0;
+`;
+
+export const RightPointer = styled.div`
+display: none;
+position: absolute;
+height: 100%;
+width: 50%;
+top: 0;
+left: 0;
+zIndex: 10;
+align-items: center;
+cursor: pointer;
+${CartFigure}:hover & {
+  display: flex;
+}
+`;
+
+export const LeftPointer = styled.div`
+display: none;
+position: absolute;
+height: 100%;
+width: 50%;
+top: 0;
+right: 0;
+zIndex: 10;
+align-items: center;
+justify-content: flex-end;
+cursor: pointer;
+${CartFigure}:hover & {
+  display: flex;
+}
 `;

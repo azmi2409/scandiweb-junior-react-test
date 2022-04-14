@@ -14,7 +14,7 @@ import {
   AttrType,
   Submit,
   ProductDesc,
-  AttrPrice
+  AttrPrice,
 } from "./ProductDisplayStyle";
 import React, { Component } from "react";
 import { withParams, createMarkup } from "../../lib/helpers/";
@@ -76,9 +76,13 @@ class ProductDisplay extends Component {
   componentDidMount() {
     const product = this.props.params.product;
     const handleProduct = this.props.handleProduct;
-    handleProduct(product).then(
-      () => (document.title = `Product Page | ${this.props.product.name}`)
-    );
+    handleProduct(product);
+    document.title = `Product Page | ${this.props.product.name}`;
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.product.name !== this.props.product.name) {
+      document.title = `Product Page | ${this.props.product.name}`;
+    }
   }
 
   Type = (type, val, name) => {
@@ -109,7 +113,8 @@ class ProductDisplay extends Component {
     return (
       <Container>
         <SidePict>
-          {product && product.gallery &&
+          {product &&
+            product.gallery &&
             product.gallery.map((v, i) => (
               <Galleries
                 loading="lazy"
@@ -145,7 +150,7 @@ class ProductDisplay extends Component {
             </Attributes>
             <AttrName>Price:</AttrName>
             <AttrPrice>{price(product.prices)}</AttrPrice>
-              <Submit onClick={this.handleAddCart}>ADD TO CART</Submit>
+            <Submit onClick={this.handleAddCart}>ADD TO CART</Submit>
             <ProductDesc
               dangerouslySetInnerHTML={createMarkup(product.description)}
             />

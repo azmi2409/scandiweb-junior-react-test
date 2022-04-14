@@ -1,7 +1,7 @@
 import styled from "styled-components";
 export const MiniCartContainer = styled.div`
   display: grid;
-  margin-right: 87px;
+  padding-right: 87px;
   background: #ffffff;
   max-height: 540px;
   height: 100%;

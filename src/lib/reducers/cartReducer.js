@@ -10,6 +10,10 @@ import {
   SET_PRODUCTS,
   INC_CART,
   DEC_CART,
+  CLOSE_CART,
+  CLOSE_CURRENCIES,
+  OPEN_CART,
+  OPEN_CURRENCIES
 } from "../actions/cartActions";
 import { isEqual } from "lodash";
 
@@ -77,6 +81,14 @@ const cartReducer = (state = initState, action) => {
         cart: newCart,
       };
     }
+    case CLOSE_CART:
+      return { ...state, isCartOpen: false };
+    case CLOSE_CURRENCIES:
+      return { ...state, isCurrenciesOpen: false };
+    case OPEN_CART:
+      return { ...state, isCartOpen: true };
+    case OPEN_CURRENCIES:
+      return { ...state, isCurrenciesOpen: true };
     default:
       return state;
   }

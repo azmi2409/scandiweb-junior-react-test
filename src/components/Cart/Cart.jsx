@@ -8,8 +8,6 @@ import {
   CartContainer,
   Quantity,
   Button,
-  CartFigure,
-  CartImg,
   Brand,
   Title,
   Name,
@@ -18,6 +16,7 @@ import {
   Properties,
   Attributes,
 } from "./CartStyle";
+import Carousel from "./Carousel";
 
 export default class Cart extends Component {
   componentDidMount() {
@@ -87,14 +86,12 @@ export default class Cart extends Component {
                         <Button onClick={() => this.props.incCart(item)}>
                           +
                         </Button>
-                        <span>{item.quantity}</span>
+                        <div>{item.quantity}</div>
                         <Button onClick={() => this.props.decCart(item)}>
                           -
                         </Button>
                       </Quantity>
-                      <CartFigure>
-                        <CartImg src={item.image[0]} alt={item.name} />
-                      </CartFigure>
+                      <Carousel image={item.image} />
                     </CartQuantity>
                   </CartContainer>
                 );

@@ -20,12 +20,15 @@ export default class OutsideWrapper extends Component {
      * Alert if clicked on outside of element
      */
     handleClickOutside(event) {
+      if(this.props.parentRef && this.props.parentRef.current.contains(event.target)) {
+          return
+      }
       if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
         this.props.action();
       }
     }
   
     render() {
-      return <div ref={this.wrapperRef}>{this.props.children}</div>;
+      return <div style={this.props.styles} ref={this.wrapperRef}>{this.props.children}</div>;
     }
   }
