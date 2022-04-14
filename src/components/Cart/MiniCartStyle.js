@@ -99,6 +99,7 @@ export const Swatch = styled.div`
   display: flex;
   height: 24px;
   width: 24px;
+  margin: 0;
   border: 1px solid #a6a6a6;
   box-sizing: border-box;
   background-color: ${(props) => props.color};
@@ -109,6 +110,7 @@ export const Swatch = styled.div`
 export const Properties = styled.button`
   display: flex;
   height : 24px;
+  margin: 0;
   min-width: 24px;
   max-width: 32px;
   background: white;
@@ -158,14 +160,12 @@ export const CartContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  height: 100%;
   gap: 0.5 em;
   overflow-y: auto;
 `;
 
 export const CartFigure = styled.div`
   display: flex;
-  height: 100%;
   align-items: center;
   justify-content: center;
 `;
@@ -173,17 +173,18 @@ export const CartFigure = styled.div`
 export const Quantity = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  height: 100%;
   font-weight: 500;
+  min-height: 137px;
   font-size: 14px;
 `;
 
 export const CartQuantity = styled.div`
   display: flex;
   flex-direction: row;
-  height: 100%;
+  align-items: flex-start;
+  justify-content: flex-start;
   width: 100%;
 `;
 
@@ -199,18 +200,21 @@ export const Brand = styled.h2`
   font-size: 16px;
   font-weight: 300;
   line-height: 26px;
+  margin: 0;
 `;
 
 export const Name = styled.h2`
   font-size: 16px;
   font-weight: 300;
   line-height: 26px;
+  margin: 0;
 `;
 
 export const Price = styled.h2`
   font-size: 16px;
   font-weight: 500;
   line-height: 26px;
+  margin: 0.1em 0;
 `;
 
 export const MiniCartPrices = styled.div`
