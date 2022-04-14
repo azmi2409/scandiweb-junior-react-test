@@ -7,11 +7,13 @@ export const TOGGLE_CART = "TOGGLE_CART";
 export const TOGGLE_CURRENCIES = "TOGGLE_CURRENCIES";
 export const SET_PRODUCT = "SET_PRODUCT";
 export const SET_PRODUCTS = "SET_PRODUCTS";
+export const INC_CART = "INC_CART";
+export const DEC_CART = "DEC_CART";
 
-export const addToCart = (obj) => {
+export const addToCart = (product) => {
   return {
     type: ADD_TO_CART,
-    obj,
+    product,
   };
 };
 export const addToCategories = (categories) => {
@@ -61,3 +63,16 @@ export const setProducts = (products) => {
     products,
   };
 };
+export const incCart = (product) => {
+  return {
+    type: INC_CART,
+    product,
+  };
+}
+
+export const decCart = (product) => {
+  return {
+    type: DEC_CART,
+    product,
+  };
+}

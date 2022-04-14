@@ -5,8 +5,8 @@ export const Container = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   max-height: 80px;
   max-width: 1440px;
-  padding: 1em 3em;
-  margin: 0 2em;
+  padding: 0.5em 3em;
+  margin: 0 0.5em;
 `;
 
 export const NavLink = styled.ul`

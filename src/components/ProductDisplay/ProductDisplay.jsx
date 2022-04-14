@@ -62,7 +62,7 @@ class ProductDisplay extends Component {
         price: this.props.product.prices,
         attributes: this.props.product.attributes,
         quantity: 1,
-        image: this.props.product.gallery[0],
+        image: this.props.product.gallery,
       };
       return this.props.handleAdd(newItems);
     }
@@ -76,7 +76,6 @@ class ProductDisplay extends Component {
   componentDidMount() {
     const product = this.props.params.product;
     const handleProduct = this.props.handleProduct;
-    console.log(product)
     handleProduct(product).then(
       () => (document.title = `Product Page | ${this.props.product.name}`)
     );

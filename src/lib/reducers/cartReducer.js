@@ -8,7 +8,10 @@ import {
   TOGGLE_CURRENCIES,
   SET_PRODUCT,
   SET_PRODUCTS,
+  INC_CART,
+  DEC_CART,
 } from "../actions/cartActions";
+import { isEqual } from "lodash";
 
 const initState = {
   categories: ["all"],
@@ -49,6 +52,31 @@ const cartReducer = (state = initState, action) => {
       return { ...state, product: action.product };
     case SET_PRODUCTS:
       return { ...state, products: action.products };
+    case INC_CART: {
+      const { cart } = state;
+      const { product } = action;
+      const newCart = [...cart];
+      const index = newCart.findIndex((item) => item.id === product.id && isEqual(item.properties, product.properties));
+      newCart[index].quantity += 1;
+      return {
+        ...state,
+        cart: newCart,
+      };
+    }
+    case DEC_CART: {
+      const { cart } = state;
+      const { product } = action;
+      const newCart = [...cart];
+      const index = newCart.findIndex((item) => item.id === product.id && isEqual(item.properties, product.properties));
+      newCart[index].quantity -= 1;
+      if (newCart[index].quantity === 0) {
+        newCart.splice(index, 1);
+      }
+      return {
+        ...state,
+        cart: newCart,
+      };
+    }
     default:
       return state;
   }

@@ -13,10 +13,39 @@ import {
   Brand,
   Title,
   Name,
-  Price
+  Price,
+  Swatch,
+  Properties,
+  Attributes,
 } from "./CartStyle";
 
 export default class Cart extends Component {
+  componentDidMount() {
+    document.title = `Cart ${this.props.cart.length} Items`;
+  }
+  Type = (type, val, id, index) => {
+    if (type === "swatch") {
+      return (
+        <Swatch
+          key={val}
+          color={val}
+          selected={this.getSelected(id, val, index)}
+        />
+      );
+    }
+    return (
+      <Properties key={val} selected={this.getSelected(id, val, index)}>
+        {val}
+      </Properties>
+    );
+  };
+  getSelected = (key, val, index) => {
+    const data = this.props.cart[index].properties[key];
+    if (data) {
+      return data === val;
+    }
+    return false;
+  };
   render() {
     const { cart, price } = this.props;
     return (
@@ -27,26 +56,44 @@ export default class Cart extends Component {
         <Grid>
           <div>
             {cart &&
-              cart.map((item, index) => {
+              cart.map((item, i) => {
                 return (
-                  <CartContainer key={index}>
+                  <CartContainer key={i}>
                     <CartDetails>
                       <Brand>{item.brand}</Brand>
                       <Name>{item.name}</Name>
                       <Price>{price(item.price)}</Price>
+                      <Attributes>
+                        {item.attributes.map((attr, index) => {
+                          return (
+                            <div
+                              style={{
+                                flexDirection: "row",
+                                display: "flex",
+                                gap: "0.5em",
+                              }}
+                              key={index}
+                            >
+                              {attr.items.map((v) =>
+                                this.Type(attr.type, v.value, attr.id, i)
+                              )}
+                            </div>
+                          );
+                        })}
+                      </Attributes>
                     </CartDetails>
                     <CartQuantity>
                       <Quantity>
-                        <Button onClick={() => this.props.decrement(item.id)}>
-                          -
+                        <Button onClick={() => this.props.incCart(item)}>
+                          +
                         </Button>
                         <span>{item.quantity}</span>
-                        <Button onClick={() => this.props.increment(item.id)}>
-                          +
+                        <Button onClick={() => this.props.decCart(item)}>
+                          -
                         </Button>
                       </Quantity>
                       <CartFigure>
-                        <CartImg src={item.image} alt={item.name} />
+                        <CartImg src={item.image[0]} alt={item.name} />
                       </CartFigure>
                     </CartQuantity>
                   </CartContainer>

@@ -9,36 +9,35 @@ import { mapStateToProps, mapDispatchToProps } from "./lib/helpers/";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CartOverlay from "./components/Cart/CartOverlay";
 import { Main } from "./components/ProductList/ProductListStyle";
+import { isEqual } from "lodash";
 import "./lib/main.css";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.changeCurr = this.changeCurr.bind(this);
-    this.handleProduct = this.handleProduct.bind(this)
-    this.myRef = React.createRef();
-    this.cartRef = React.createRef();
+    this.handleProduct = this.handleProduct.bind(this);
   }
 
-  handleCart = () => {
+  componentDidMount() {
+    this.props.loadCategories();
+    this.props.loadCurrencies();
+  }
+
+  handleCart = (e) => {
     this.props.toggleCart();
   };
 
   changeCurr(currency) {
     this.props.changeCurrency(currency);
+    this.currOpen();
   }
 
   currOpen = () => {
     this.props.toggleCurrencies();
-    if (!this.props.isCurrencyOpen) {
-      document.addEventListener("click", this.handleOutsideClick, false);
-    } else {
-      document.removeEventListener("click", this.handleOutsideClick, false);
-    }
   };
 
   handleProduct = async (product) => {
-    console.log('handleProduct',product)
     this.props.loadProduct(product);
   };
 
@@ -46,17 +45,13 @@ class App extends Component {
     this.props.loadCategory(category);
   };
 
-  handleOutsideClick = (e) => {
-    if (this.myRef.current) {
-      if (this.myRef.current && !this.myRef.current.contains(e.target)) {
-        this.currOpen();
-      }
-    }
-  };
-
   handleAdd = (item) => {
     const obj = { ...item };
-    this.props.addToCart(obj);
+    //find item
+    const itemInCart = this.props.cart.find(
+      (i) => i.id === obj.id && isEqual(i.properties, obj.properties)
+    );
+    this.props.addCart(obj, itemInCart);
   };
 
   getPrice = (prices) => {
@@ -65,24 +60,19 @@ class App extends Component {
     );
     return prices[index].currency.symbol + prices[index].amount;
   };
-
-  componentDidMount() {
-    this.props.loadCategories();
-    this.props.loadCurrencies();
-  }
   render() {
     return (
       <BrowserRouter>
         <Header
           innerRef={this.myRef}
-          curRef={this.cartRef}
+          cartRef={this.cartRef}
           chCurr={this.changeCurr}
           curr={this.currOpen}
           handleCart={this.handleCart}
           {...this.props}
         />
         <Main>
-          {this.props.isCartOpen && <CartOverlay />}
+          {this.props.isCartOpen && <CartOverlay price={this.getPrice} {...this.props} />}
           <Routes>
             <Route path="/" element={<Redirect />} />
             <Route

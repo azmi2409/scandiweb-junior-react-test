@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import Brand from "../../assets/Brand.svg";
 import Cart from "../../assets/Cart.svg";
 import Arrow from "../../assets/Arrow.svg";
+import OutsideWrapper from "./OutsideWrapper";
 
 export default class Header extends Component {
   render() {
@@ -44,7 +45,8 @@ export default class Header extends Component {
               alt="Arrow"
             />
             {isCurrencyOpen && (
-              <Currency ref={this.props.curRef}>
+              <OutsideWrapper action={curr}>
+              <Currency onClick={e => e.stopPropagation()}>
                 <ul style={{ listStyle: "none", padding: "0.8em" }}>
                   {currencies
                     .filter((v) => v.symbol !== this.props.currency)
@@ -57,6 +59,7 @@ export default class Header extends Component {
                     ))}
                 </ul>
               </Currency>
+              </OutsideWrapper>
             )}
           </NavMenu>
           <NavMenu onClick={handleCart}>

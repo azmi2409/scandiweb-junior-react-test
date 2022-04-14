@@ -3,10 +3,10 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 1em 2em;
-  margin: 1em 2em;
+  padding: 1em 3em;
+  margin: 1em 0.5em;
   max-width: 100%;
+  min-height: 100vh;
 `;
 
 export const Grid = styled.div`
@@ -34,7 +34,6 @@ export const CartContainer = styled.div`
   width: 100%;
   border-top: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
-  height: 40vh;
 `;
 
 export const CartDetails = styled.div`
@@ -50,10 +49,8 @@ export const CartDetails = styled.div`
 export const CartQuantity = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 0.5em 1em;
-  padding: 0.5em 1em;
-  height: 90%;
   align-self: center;
+  height: 100%;
 `;
 
 export const Quantity = styled.div`
@@ -62,23 +59,21 @@ export const Quantity = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 100%;
-  position: relative;
   font-weight: 500;
   font-size: 24px;
   line-height: 160%;
+  gap: 0.5em;
 `;
 
 export const CartFigure = styled.div`
   display: flex;
   height: 100%;
-  position: relative;
-  margin: 0 1em;
 `;
 
 export const CartImg = styled.img`
-  height: 185px;
+  height: 100%;
   object-fit: contain;
-  width: 141px;
+  width: 150px;
 `;
 
 export const Button = styled.button`
@@ -143,81 +138,37 @@ export const Overlay = styled.div`
   z-index: 50;
 `;
 
-export const MiniCartContainer = styled.div`
-  display: flex;
-  margin-right: 87px;
-  z-index: 51;
-  background: #ffffff;
-  height: 540px;
-  width: 325px;
-  padding: 0 1em;
-  flex-direction: column;
-`;
-
-export const MiniCartHeader = styled.h2`
-display: flex;
-flex-direction: rows;
-font-weight: 700;
-font-size: 16px;
-line-height: 160%;
-width: 100%;
-`;
-
-export const MiniCartItems = styled.div`
-display: grid;
-grid-template-columns: 1fr 1fr;
-width: 100%;
-`;
-
-export const MiniCartQuantity = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin: 0.5em 1em;
-  padding: 0.5em 1em;
-  height: 90%;
-  align-self: center;
-`;
-
-export const MiniQuantity = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-  position: relative;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 160%;
-`;
-
-export const MiniCartFigure = styled.div`
-  display: flex;
-  height: 100%;
-  position: relative;
-  margin: 0 1em;
-`;
-
-export const MiniCartImg = styled.img`
-  height: 137px;
-  object-fit: contain;
-  width: 105px;
-`;
-
-export const MiniButton = styled.button`
+export const Swatch = styled.div`
   display: flex;
   height: 45px;
-  width: 45px;
+  width: 63px;
+  border: 1px solid #1D1F22;
+  box-sizing: border-box
+  cursor: pointer;
+  background-color: ${(props) => props.color};
+  ${(props) => props.selected && `border: 4px solid #1D1F22;`}
+`;
+
+export const Properties = styled.button`
+  display: flex;
+  height : 45px;
+  width: 63px;
   background: white;
   align-items: center;
   justify-content: center;
-  border: 1px solid #1d1f22;
+  border: 1px solid #1D1F22;
+  box-sizing: border-box
   cursor: pointer;
   font-weight: 400;
-  box-sizing: border-box;
-  font-size: 24px;
-  line-height: 160%;
-  :active {
-    background: #1d1f22;
-    color: white;
-  }
+  ${(props) => props.selected && `background: #1D1F22; color: white;`}
+`;
+
+export const Attributes = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+align-items: flex-start;
+gap: 1em;
+height: 100%;
+margin: 1.5em 0;
 `;

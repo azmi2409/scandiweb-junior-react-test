@@ -10,6 +10,8 @@ import {
   toggleCurrencies,
   setProduct,
   setProducts,
+  incCart,
+  decCart,
 } from "../actions/cartActions";
 
 export function withParams(Component) {
@@ -158,6 +160,15 @@ export const mapDispatchToProps = (dispatch) => {
     loadProduct: (product) => {
       loadProduct(dispatch, product);
     },
+    addCart: (product, item) => {
+      addCart(dispatch, product, item);
+    },
+    incCart: (item) => {
+      dispatch(incCart(item));
+    },
+    decCart: (item) => {
+      dispatch(decCart(item));
+    },
   };
 };
 
@@ -189,4 +200,16 @@ function loadProduct(dispatch, product) {
   getProduct(product).then((data) => {
     dispatch(setProduct(data));
   });
+}
+
+function addCart(dispatch, product, item) {
+  //check if product exists in cart
+  if (item) {
+    //add to quantity
+    dispatch(incCart(product));
+  } else {
+    //add new item
+    product.quantity = 1;
+    dispatch(addToCart(product));
+  }
 }
