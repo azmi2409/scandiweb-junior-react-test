@@ -12,3 +12,4 @@ Hi! This Repo is made to join Entry React Developer Test for [Scandiweb](https:/
 - [Styled-Component](https://github.com/styled-components/styled-components) (CSS in JS Styling)
 - [GraphQL-Request](https://www.npmjs.com/package/graphql-request) (Create Request to GraphQL Server)
 - [React-Router-Dom](https://www.npmjs.com/package/react-router-dom) (in App Routing *actually i used wrapper for working with class component)
+- [Redux-Thunk](https://github.com/reduxjs/redux-thunk) (Middleware for Redux)
