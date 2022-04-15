@@ -2,10 +2,12 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: grid;
-  grid-template-columns: 2fr 10fr 8fr 1fr;
+  grid-template-columns: 2fr 10fr 8fr;
   grid-gap: 1em;
-  padding: 2em 2em;
-  margin: 0 2em;
+  padding: 80px 101px;
+  margin: 0;
+  min-height: 100vh;
+  height: 100%;
   max-width: 100%;
 `;
 
@@ -14,8 +16,8 @@ export const SidePict = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 1em 2em;
-  height: 520px;
+  gap: 32px;
+  max-height: 560px;
   overflow: scroll;
   scrollbar-width: none;
 
@@ -29,17 +31,15 @@ export const Description = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 1em;
-  height: 520px;
+  height: 100%;
 `;
 
 export const MainPict = styled.div`
   display: flex;
   flex-direction: column;
-  height: 520px;
+  height: 560px;
   justify-content: flex-start;
   align-items: center;
-  padding: 1em 2em;
   position: relative;
 `;
 
@@ -72,7 +72,6 @@ export const Properties = styled.button`
 
 export const Galleries = styled.img`
   max-height: 88px;
-  margin-top: 0.5em;
   cursor: pointer;
 `;
 
@@ -126,7 +125,7 @@ export const AttrType = styled.div`
   align-items: center;
   width: 100%;
   margin: 0.5em 0;
-  gap: 1em;
+  gap: 12px;
 `;
 
 export const ButtonWrapper = styled.div`
@@ -164,7 +163,6 @@ font-weight: 400;
 font-size: 16px;
 line-height: 159.96%;
 width: 292px;
-height: 103px;
 color: #1D1F22;
 `;
 

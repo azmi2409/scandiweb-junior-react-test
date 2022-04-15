@@ -98,7 +98,6 @@ export default class Cart extends Component {
                 );
               })}
           </div>
-          <div></div>
         </Grid>
       </Container>
     );

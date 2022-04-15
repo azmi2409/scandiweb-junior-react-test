@@ -50,10 +50,11 @@ class MiniCart extends Component {
   getTotalPrice = () => {
     const totalPrice = this.props.cart.reduce((acc,v) => {
         const price = parseFloat(this.props.price(v.price).slice(1))
-        return acc + price
+        const quantity = parseInt(v.quantity)
+        return acc + (price * quantity)
     },0)
     const currency = this.props.currency
-    return `${currency}${totalPrice}`
+    return `${currency}${totalPrice.toFixed(2)}`
   };
   render() {
     const { cart } = this.props;

@@ -14,7 +14,6 @@ import CartCirle from "../../assets/CartCirle.svg";
 class Cards extends Component {
   render() {
     const { v, price } = this.props;
-    console.log(v);
     return (
           <Card onClick={() => this.props.navigate(`/product/${v.id}`)}>
             <ImgWrapper>

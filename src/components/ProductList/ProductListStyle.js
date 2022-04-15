@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  padding: 2em 1em;
-  margin: 0 0.5em;
+  padding: 80px 101px;
+  margin: 0;
   max-width: 100%;
   display: flex;
   flex-direction: column;
@@ -11,10 +11,8 @@ export const Container = styled.div`
 export const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 1em;
-  padding: 1em;
-  margin: 1em;
-  width: 100%;
+  padding: 0;
+  margin: 0;
 `;
 
 export const Card = styled.div`
@@ -75,7 +73,8 @@ export const CategoryName = styled.h1`
   font-size: 42px;
   line-height: 160%;
   font-weight: 400;
-  margin: 0 1em;
+  margin-top: 80px
+  margin-bottom: 87.62px;
   text-transform: capitalize;
 `;
 
@@ -107,5 +106,8 @@ export const PriceTag = styled.span`
 export const Main = styled.div`
   margin: 0;
   padding: 0;
+  min-height: 100vh;
+  width: 100%;
+  height: 100%;
   position: relative;
 `;
