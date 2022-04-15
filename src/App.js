@@ -82,6 +82,7 @@ class App extends Component {
               element={
                 <ProductList
                   handleProduct={this.handleProduct}
+                  handleAdd={this.handleAdd}
                   {...this.props}
                   price={this.getPrice}
                   click={this.handleClick}

@@ -64,17 +64,15 @@ class ProductDisplay extends Component {
     const { properties } = this.state;
     const error = product.attributes.filter((v) => {
       return properties[v.name] === undefined;
-    }
-    );
+    });
     if (error.length > 0) {
-      const allError = error.reduce((acc,v) => {
+      const allError = error.reduce((acc, v) => {
         return acc + `${v.name} `;
-      }
-      , "");
+      }, "");
 
       return `Please select ${allError}`;
     }
-  }
+  };
 
   handleAddCart = () => {
     const checked = this.validateProps();
@@ -111,8 +109,8 @@ class ProductDisplay extends Component {
     const handleProduct = this.props.handleProduct;
     handleProduct(product);
     document.title = `Product Page | ${this.props.product.name}`;
-    if(this.detailsRef.current){
-      const html = createMarkup(this.props.product.description)
+    if (this.detailsRef.current) {
+      const html = createMarkup(this.props.product.description);
       this.detailsRef.current.innerHTML = html;
     }
   }
@@ -120,8 +118,8 @@ class ProductDisplay extends Component {
     if (prevProps.product.name !== this.props.product.name) {
       document.title = `Product Page | ${this.props.product.name}`;
     }
-    if(prevProps.product.description !== this.props.product.description){
-      const html = createMarkup(this.props.product.description)
+    if (prevProps.product.description !== this.props.product.description) {
+      const html = createMarkup(this.props.product.description);
       this.detailsRef.current.innerHTML = html;
     }
   }
@@ -186,19 +184,14 @@ class ProductDisplay extends Component {
                     </AttrType>
                   </React.Fragment>
                 ))}
+                {this.state.error && (
+                  <Error>
+                    <span>{this.state.errorMsg}</span>
+                  </Error>
+                )}
               </Attributes>
               <AttrName>Price:</AttrName>
               <AttrPrice>{price(product.prices)}</AttrPrice>
-              {this.state.success && (
-                <Success>
-                  <span>Added To Cart</span>
-                  </Success>
-                  )}
-                  {this.state.error && (
-                    <Error>
-                      <span>{this.state.errorMsg}</span>
-                    </Error>
-                  )}
               <AddButton
                 inStock={product.inStock}
                 handleAddCart={this.handleAddCart}
@@ -206,6 +199,11 @@ class ProductDisplay extends Component {
               <ProductDesc ref={this.detailsRef} />
             </Description>
           </>
+        )}
+        {this.state.success && (
+          <Success>
+            <span>Success Added To Cart</span>
+          </Success>
         )}
       </Container>
     );

@@ -229,7 +229,7 @@ function loadProduct(dispatch, product) {
   });
 }
 
-const getDefaultProps = (attributes) => {
+export const getDefaultProps = (attributes) => {
   const defaultProps = attributes.reduce((acc, v) => {
     acc[v.name] = v.items[0].value;
     return acc;
@@ -239,19 +239,6 @@ const getDefaultProps = (attributes) => {
 
 function addCart(dispatch, product, item) {
   //check if product exists in cart
-  if(!item && !product.properties){
-    const newProduct = {
-      properties: getDefaultProps(product.attributes),
-      id: product.id,
-      name: product.name,
-      brand: product.brand,
-      prices: product.prices,
-      attributes: product.attributes,
-      quantity: 1,
-      gallery: product.gallery,
-    }
-    return dispatch(addToCart(newProduct));
-  }
   if (item) {
     //add to quantity
     return dispatch(incCart(product));

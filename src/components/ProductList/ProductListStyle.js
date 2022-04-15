@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  padding: 80px 101px;
+  padding: 5rem 6.375rem;
+  padding-bottom: 11.9375rem;
   margin: 0;
   max-width: 100%;
   display: flex;
   flex-direction: column;
+  gap: 5rem;
 `;
 
 export const Grid = styled.div`
@@ -13,6 +15,8 @@ export const Grid = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   padding: 0;
   margin: 0;
+  column-gap: 2.5rem;
+  row-gap: 6.4375rem
 `;
 
 export const Card = styled.div`
@@ -20,12 +24,15 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  padding: 16px;
-  gap: 0.5em;
-  width: 386px;
-  height: 444px;
+  padding: 1em;
+  width: 24.125em;
+  height: 27.75em;
   :hover {
-    box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+    box-shadow: 0 0.4em 2.1875rem rgba(168, 172, 176, 0.19);
+  }
+  @media (max-width: 1366px) {
+    width: 22.6775em;
+    height: 26.085em;
   }
 `;
 
@@ -40,7 +47,7 @@ export const Overlay = styled.div`
   opacity: 0.5;
   display: flex;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 1.5rem;
   text-transform: uppercase;
   align-items: center;
   justify-content: center;
@@ -51,8 +58,8 @@ export const Overlay = styled.div`
 export const CartLogo = styled.div`
   display: flex;
   position: absolute;
-  bottom: -26px;
-  right: 31px;
+  bottom: -3.125rem;
+  right: 1.9375rem;
   padding: 0;
   display: none;
 
@@ -70,24 +77,27 @@ export const CartImage = styled.img`
 `;
 
 export const CategoryName = styled.h1`
-  font-size: 42px;
+  font-size: 2.625rem;
   line-height: 160%;
   font-weight: 400;
   margin: 0;
-  margin-bottom: 87.62px;
   text-transform: capitalize;
 `;
 
 export const ImgWrapper = styled.div`
   position: relative;
-  width: 356px;
-  height: 338px;
+  margin-bottom: 1.3125rem;
 `;
 
 export const ImgHero = styled.img`
   object-fit: contain;
-  height: 338px;
-  width: 356px;
+  height: 21.25rem;
+  width: 22.25rem;
+
+  @media (max-width: 1366px) {
+    height: 19.5rem;
+    width: 20.5rem;
+  }
 `;
 
 export const PriceWrapper = styled.div`
@@ -95,10 +105,29 @@ export const PriceWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  gap: 1.3125rem;
+`;
+
+export const Success = styled.h2`
+  position: fixed;
+  display: flex;
+  bottom: 0;
+  right: 0;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  font-size: 1rem;
+  padding: 0.5em 2em;
+  margin: 1em;
+  background: #5ECE7B;
+  color: white;
+  opacity: 0.8;
+  border-radius: 0.25rem;
+  z-index: 3;
 `;
 
 export const PriceTag = styled.span`
-  font-size: 18px;
+  font-size: 1.125rem;
   line-height: 160%;
   font-weight: ${(props) => (props.weight ? props.weight : "400")};
 `;

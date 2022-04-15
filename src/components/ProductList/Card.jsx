@@ -8,6 +8,7 @@ import {
   Overlay,
   CartLogo,
   CartImage,
+  Success
 } from "./ProductListStyle";
 import CartCirle from "../../assets/CartCirle.svg";
 
@@ -22,7 +23,7 @@ class Cards extends Component {
                 <CartLogo
                   onClick={(e) => {
                     e.stopPropagation();
-                    this.props.addCart(v);
+                    this.props.addDefaultCart(v);
                   }}
                 >
                   <CartImage src={CartCirle} alt="add to cart" />

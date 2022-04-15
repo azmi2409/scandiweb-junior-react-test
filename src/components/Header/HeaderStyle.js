@@ -3,18 +3,18 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  max-height: 80px;
-  max-width: 100%;
-  padding: 1px 101px;
+  max-height: 5rem;
+  max-width: 100vw;
+  padding: 0.0625rem 6.3125rem;
   margin: 0;
 `;
 
 export const NavLink = styled.ul`
   display: flex;
   list-style: none;
-  gap: 32px;
-  padding-bottom: 32px;
-  padding-top: 28px;
+  gap: 2rem;
+  padding-bottom: 2rem;
+  padding-top: 1.75rem;
   height: 100%;
   padding: 0;
   margin: 0;
@@ -25,7 +25,7 @@ export const NavItem = styled.li`
   text-transform: uppercase;
   cursor: pointer;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 120%;
   display: flex;
   height: 100%;
@@ -33,7 +33,7 @@ export const NavItem = styled.li`
   align-items: center;
   ${(props) =>
     props.active &&
-    `border-bottom: 2px solid #5ECE7B;
+    `border-bottom: 0.125rem solid #5ECE7B;
     color: #5ECE7B;
     font-weight: 600;`}
 `;
@@ -41,7 +41,7 @@ export const NavItem = styled.li`
 export const NavCategory = styled.div`
   display: flex;
   height: 100%;
-  padding-left: 16px;
+  padding-left: 1rem;
   justify-content: flex-start;
 `;
 
@@ -50,8 +50,8 @@ export const NavBrand = styled.div`
   align-items: center;
   align-self: center;
   justify-content: center;
-  padding-bottom: 20px;
-  padding-top: 30px;
+  padding-bottom: 1.25rem;
+  padding-top: 1.875rem;
 `;
 
 export const NavMenus = styled.div`
@@ -60,34 +60,34 @@ export const NavMenus = styled.div`
   flex-direction: row;
   justify-content: flex-end;
   cursor: pointer;
-  gap: 22px;
+  gap: 1.375rem;
 `;
 
 export const NavMenu = styled.div`
   display: flex;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 1.125rem;
   position: relative;
 `;
 
 export const Currency = styled.div`
   display: flex;
-  padding: 20px;
+  padding: 1.25rem;
   position: absolute;
   flex-direction: column;
-  gap: 50px;
+  gap: 3.125rem;
   top: 70%;
   left: -150%;
   bottom: 0;
   right: 0;
-  font-size: 18px;
+  font-size: 1.125rem;
   line-height: 160%;
   font-weight: 500;
   overflow: scroll;
-  height: 169px;
-  width: 114px;
+  height: 10.5625rem;
+  width: 7.125rem;
   background: #ffffff;
-  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+  box-shadow: 0 0.25rem 2.1875rem rgba(168, 172, 176, 0.19);
   z-index: 2000;
 `;
 
@@ -105,9 +105,9 @@ export const CartNumber = styled.div`
   position: absolute;
   top: -50%;
   right: -50%;
-  height: 20px;
-  width: 20px;
-  font-size: 14px;
+  height: 1.25rem;
+  width: 1.25rem;
+  font-size: 0.875rem;
   font-weight: 700;
   font-family: "Roboto Condensed";
   background: #1d1f22;

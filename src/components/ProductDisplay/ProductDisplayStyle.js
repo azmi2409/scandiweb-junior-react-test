@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: 2fr 10fr 8fr;
   grid-gap: 1em;
-  padding: 80px 101px;
+  padding: 5rem 6.3125rem;
   margin: 0;
   min-height: 100vh;
   height: 100%;
@@ -16,8 +16,8 @@ export const SidePict = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  gap: 32px;
-  max-height: 560px;
+  gap: 2rem;
+  max-height: 35rem;
   overflow: scroll;
   scrollbar-width: none;
 
@@ -28,17 +28,17 @@ export const SidePict = styled.div`
 
 export const Description = styled.div`
   display: flex;
-  gap: 16px;
+  gap: 1rem;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  height: 560px;
+  height: 35rem;
 `;
 
 export const MainPict = styled.div`
   display: flex;
   flex-direction: column;
-  height: 560px;
+  height: 35rem;
   justify-content: flex-start;
   align-items: center;
   position: relative;
@@ -46,24 +46,24 @@ export const MainPict = styled.div`
 
 export const Swatch = styled.div`
   display: flex;
-  height: 45px;
-  width: 63px;
-  border: 1px solid #1D1F22;
+  height: 2.8125rem;
+  width: 3.9375rem;
+  border: 0.0625rem solid #1D1F22;
   box-sizing: border-box
   cursor: pointer;
   background-color: ${(props) => props.color};
-  ${(props) => props.selected && `border: 4px solid #1D1F22;`}
+  ${(props) => props.selected && `border: 0.25rem solid #1D1F22;`}
   ${(props) => props.disabled && `opacity: 0.5; cursor: not-allowed;`}
 `;
 
 export const Properties = styled.button`
   display: flex;
-  height : 45px;
-  width: 63px;
+  height : 2.8125rem;
+  width: 3.9375rem;
   background: white;
   align-items: center;
   justify-content: center;
-  border: 1px solid #1D1F22;
+  border: 0.0625rem solid #1D1F22;
   box-sizing: border-box
   cursor: pointer;
   font-weight: 400;
@@ -72,7 +72,7 @@ export const Properties = styled.button`
 `;
 
 export const Galleries = styled.img`
-  max-height: 88px;
+  max-height: 5.5rem;
   cursor: pointer;
 `;
 
@@ -83,19 +83,19 @@ export const Gallery = styled.img`
 `;
 
 export const Brand = styled.h2`
-  font-size: 30px;
+  font-size: 1.875rem;
   font-weight: 600;
-  line-height: 27px;
+  line-height: 1.6875rem;
   margin: 0;
   padding: 0;
 `;
 
 export const Item  = styled.h3`
-  font-size: 30px;
+  font-size: 1.875rem;
   font-weight: 400;
-  line-height: 27px;
+  line-height: 1.6875rem;
   margin: 0;
-  margin-bottom: 35px;
+  margin-bottom: 2.1875rem;
   padding: 0;
 
 `;
@@ -105,24 +105,24 @@ display: flex;
 flex-direction: column;
 justify-content: flex-start;
 align-items: flex-start;
-margin-bottom: 32px;
+margin-bottom: 2rem;
 `;
 
 export const AttrName = styled.h4`
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 700;
-  line-height: 18px;
-  margin: 8px 0;
+  line-height: 1.125rem;
+  margin: 0.5rem 0;
   font-family: 'Roboto Condensed'
 `;
 
 export const AttrPrice = styled.h4`
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 700;
-  line-height: 18px;
+  line-height: 1.125rem;
   margin: 0;
-  margin-top: 2px;
-  margin-bottom: 4px;
+  margin-top: 0.125rem;
+  margin-bottom: 0.25rem;
 `;
 
 
@@ -133,7 +133,7 @@ export const AttrType = styled.div`
   align-items: center;
   width: 100%;
   margin: 0.5em 0;
-  gap: 12px;
+  gap: 0.75rem;
 `;
 
 export const ButtonWrapper = styled.div`
@@ -144,15 +144,15 @@ export const ButtonWrapper = styled.div`
 `;
 
 export const Submit = styled.button`
-  width: 292px;
-  height: 52px;
-  padding: 16px 32px;
+  width: 18.25rem;
+  height: 3.25rem;
+  padding: 1rem 2rem;
   background: #5ECE7B;
   color: white;
   border: none;
   cursor: pointer;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 1rem;
   margin: 1em 0;
   transition: all 200ms ease-in-out;
   :active {
@@ -168,10 +168,10 @@ export const ProductDesc = styled.div`
 font-family: 'Roboto';
 font-style: normal;
 font-weight: 400;
-font-size: 16px;
+font-size: 1rem;
 line-height: 159.96%;
-width: 292px;
-min-height: 103px;
+width: 18.25rem;
+min-height: 6.4375rem;
 overflow: scroll;
 color: #1D1F22;
 `;
@@ -187,7 +187,7 @@ export const Overlay = styled.div`
   opacity: 0.5;
   display: flex;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 1.5rem;
   text-transform: uppercase;
   align-items: center;
   justify-content: center;
@@ -196,20 +196,28 @@ export const Overlay = styled.div`
 `;
 
 export const Error = styled.h2`
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 700;
-  line-height: 18px;
+  line-height: 1.125rem;
   margin: 0.5em 0;
   font-family: 'Roboto Condensed';
   color: red;
 `;
 
 export const Success = styled.h2`
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 18px;
-  margin: 0.5em 0;
-  font-family: 'Roboto Condensed';
-  color: #5ECE7B;
+  position: fixed;
+  display: flex;
+  bottom: 0;
+  right: 0;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  font-size: 1rem;
+  padding: 0.5em 2em;
+  margin: 1em;
+  background: #5ECE7B;
+  color: white;
+  opacity: 0.8;
+  border-radius: 0.25rem;
 `;
   

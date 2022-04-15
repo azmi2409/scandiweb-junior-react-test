@@ -3,21 +3,21 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 80px 101px;
+  padding: 5rem 6.3125rem;
   min-height: 100vh;
 `;
 
 export const Grid = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: 141px;
+  margin-right: 7.125rem;
 `;
 
 export const CartHeader = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin-bottom: 80px;
+  margin-bottom: 5rem;
   text-transform: uppercase;
 `;
 
@@ -28,9 +28,9 @@ export const CartContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  min-height: 185px;
-  border-top: 1px solid #e5e5e5;
-  border-bottom: 1px solid #e5e5e5;
+  min-height: 11.5625rem;
+  border-top: 0.0625rem solid #e5e5e5;
+  border-bottom: 0.0625rem solid #e5e5e5;
 `;
 
 export const CartDetails = styled.div`
@@ -39,8 +39,8 @@ export const CartDetails = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   height: 100%;
-  padding: 20px 0;
-  gap: 12px;
+  padding: 1.25rem 0;
+  gap: 0.75rem;
 `;
 
 export const CartQuantity = styled.div`
@@ -48,8 +48,8 @@ export const CartQuantity = styled.div`
   flex-direction: row;
   height: 100%;
   align-items: flex-start;
-  margin: 21px 0;
-  gap: 12px;
+  margin: 1.3125rem 0;
+  gap: 0.75rem;
 `;
 
 export const Quantity = styled.div`
@@ -59,9 +59,9 @@ export const Quantity = styled.div`
   align-items: center;
   height: 100%;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 1.5rem;
   line-height: 160%;
-  gap: 30px;
+  gap: 1.875rem;
 `;
 
 export const CartFigure = styled.div`
@@ -73,21 +73,21 @@ export const CartFigure = styled.div`
 export const CartImg = styled.img`
   height: 100%;
   object-fit: contain;
-  width: 150px;
+  width: 9.375rem;
 `;
 
 export const Button = styled.button`
   display: flex;
-  height: 45px;
-  width: 45px;
+  height: 2.8125rem;
+  width: 2.8125rem;
   background: white;
   align-items: center;
   justify-content: center;
-  border: 1px solid #1d1f22;
+  border: 0.0625rem solid #1d1f22;
   cursor: pointer;
   font-weight: 400;
   box-sizing: border-box;
-  font-size: 24px;
+  font-size: 1.5rem;
   line-height: 160%;
   :active {
     background: #1d1f22;
@@ -96,10 +96,10 @@ export const Button = styled.button`
 `;
 
 export const Title = styled.h1`
-  font-size: 32px;
+  font-size: 2rem;
   margin: 0;
   padding: 0;
-  line-height: 40px;
+  line-height: 2.5rem;
   text-transform: uppercase;
   font-weight: 700;
   color: #1d1f22;
@@ -107,28 +107,28 @@ export const Title = styled.h1`
 
 export const Brand = styled.h2`
   display: flex;
-  font-size: 30px;
+  font-size: 1.875rem;
   font-weight: 600;
-  line-height: 27px;
-  margin: 4px 0;
+  line-height: 1.6875rem;
+  margin: 0.25rem 0;
 `;
 
 export const Name = styled.h2`
   display: flex;
-  font-size: 30px;
+  font-size: 1.875rem;
   font-weight: 400;
-  line-height: 27px;
+  line-height: 1.6875rem;
   padding: 0;
-  margin: 14px 0;
+  margin: 0.875rem 0;
 `;
 
 export const Price = styled.h2`
   display: flex;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 700;
-  line-height: 18px;
+  line-height: 1.125rem;
   padding: 0;
-  margin: 14px 0;
+  margin: 0.875rem 0;
 `;
 
 export const Overlay = styled.div`
@@ -147,23 +147,23 @@ export const Overlay = styled.div`
 
 export const Swatch = styled.div`
   display: flex;
-  height: 45px;
-  width: 63px;
-  border: 1px solid #1D1F22;
+  height: 2.8125rem;
+  width: 3.9375rem;
+  border: 0.0625rem solid #1D1F22;
   box-sizing: border-box
   cursor: pointer;
   background-color: ${(props) => props.color};
-  ${(props) => props.selected && `border: 4px solid #1D1F22;`}
+  ${(props) => props.selected && `border: 0.25rem solid #1D1F22;`}
 `;
 
 export const Properties = styled.button`
   display: flex;
-  height : 45px;
-  width: 63px;
+  height : 2.8125rem;
+  width: 3.9375rem;
   background: white;
   align-items: center;
   justify-content: center;
-  border: 1px solid #1D1F22;
+  border: 0.0625rem solid #1D1F22;
   box-sizing: border-box
   cursor: pointer;
   font-weight: 400;
