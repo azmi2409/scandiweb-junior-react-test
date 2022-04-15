@@ -62,7 +62,7 @@ export default class Cart extends Component {
                     <CartDetails>
                       <Brand>{item.brand}</Brand>
                       <Name>{item.name}</Name>
-                      <Price>{price(item.price)}</Price>
+                      <Price>{price(item.prices)}</Price>
                       <Attributes>
                         {item.attributes.map((attr, index) => {
                           return (
@@ -92,7 +92,7 @@ export default class Cart extends Component {
                           -
                         </Button>
                       </Quantity>
-                      <Carousel image={item.image} />
+                      <Carousel image={item.gallery} />
                     </CartQuantity>
                   </CartContainer>
                 );

@@ -33,6 +33,8 @@ class ProductDisplay extends Component {
     this.handleAddCart = this.handleAddCart.bind(this);
     this.validateProps = this.validateProps.bind(this);
   }
+  detailsRef = React.createRef();
+
   chPict = (id) => {
     this.setState({ pictIndex: id });
   };
@@ -82,10 +84,10 @@ class ProductDisplay extends Component {
         id: this.props.params.product,
         name: this.props.product.name,
         brand: this.props.product.brand,
-        price: this.props.product.prices,
+        prices: this.props.product.prices,
         attributes: this.props.product.attributes,
         quantity: 1,
-        image: this.props.product.gallery,
+        gallery: this.props.product.gallery,
       };
       this.setState({ success: true });
       setTimeout(() => {
@@ -109,10 +111,18 @@ class ProductDisplay extends Component {
     const handleProduct = this.props.handleProduct;
     handleProduct(product);
     document.title = `Product Page | ${this.props.product.name}`;
+    if(this.detailsRef.current){
+      const html = createMarkup(this.props.product.description)
+      this.detailsRef.current.innerHTML = html;
+    }
   }
   componentDidUpdate(prevProps) {
     if (prevProps.product.name !== this.props.product.name) {
       document.title = `Product Page | ${this.props.product.name}`;
+    }
+    if(prevProps.product.description !== this.props.product.description){
+      const html = createMarkup(this.props.product.description)
+      this.detailsRef.current.innerHTML = html;
     }
   }
 
@@ -193,9 +203,7 @@ class ProductDisplay extends Component {
                 inStock={product.inStock}
                 handleAddCart={this.handleAddCart}
               />
-              <ProductDesc
-                dangerouslySetInnerHTML={createMarkup(product.description)}
-              />
+              <ProductDesc ref={this.detailsRef} />
             </Description>
           </>
         )}

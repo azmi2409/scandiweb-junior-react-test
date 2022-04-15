@@ -97,6 +97,8 @@ export const Button = styled.button`
 
 export const Title = styled.h1`
   font-size: 32px;
+  margin: 0;
+  padding: 0;
   line-height: 40px;
   text-transform: uppercase;
   font-weight: 700;

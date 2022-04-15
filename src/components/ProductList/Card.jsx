@@ -22,7 +22,7 @@ class Cards extends Component {
                 <CartLogo
                   onClick={(e) => {
                     e.stopPropagation();
-                    this.props.navigate(`/cart`);
+                    this.props.addCart(v);
                   }}
                 >
                   <CartImage src={CartCirle} alt="add to cart" />

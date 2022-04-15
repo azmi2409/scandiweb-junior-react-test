@@ -73,7 +73,7 @@ export const CategoryName = styled.h1`
   font-size: 42px;
   line-height: 160%;
   font-weight: 400;
-  margin-top: 80px
+  margin: 0;
   margin-bottom: 87.62px;
   text-transform: capitalize;
 `;

@@ -112,7 +112,7 @@ export const Properties = styled.button`
   height : 24px;
   margin: 0;
   min-width: 24px;
-  max-width: 32px;
+  max-width: 48px;
   background: white;
   align-items: center;
   justify-content: center;

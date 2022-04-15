@@ -49,7 +49,7 @@ class MiniCart extends Component {
   };
   getTotalPrice = () => {
     const totalPrice = this.props.cart.reduce((acc,v) => {
-        const price = parseFloat(this.props.price(v.price).slice(1))
+        const price = parseFloat(this.props.price(v.prices).slice(1))
         const quantity = parseInt(v.quantity)
         return acc + (price * quantity)
     },0)
@@ -71,7 +71,7 @@ class MiniCart extends Component {
                 <div style={{ width: "100%" }}>
                   <Brand>{item.brand}</Brand>
                   <Name>{item.name}</Name>
-                  <Price>{this.props.price(item.price)}</Price>
+                  <Price>{this.props.price(item.prices)}</Price>
                   <Attributes>
                     {item.attributes.map((attr, index) => {
                       return (
@@ -98,7 +98,7 @@ class MiniCart extends Component {
                     <Button onClick={() => this.props.decCart(item)}>-</Button>
                   </Quantity>
                   <CartFigure>
-                    <MiniCartImg src={item.image[0]} alt={item.name} />
+                    <MiniCartImg src={item.gallery[0]} alt={item.name} />
                   </CartFigure>
                 </CartQuantity>
               </MiniCartItems>

@@ -1,5 +1,5 @@
 import { request, gql } from "graphql-request";
-import { useParams , useNavigate} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   addToCategories,
   addToCart,
@@ -15,11 +15,14 @@ import {
   closeCart,
   closeCurrencies,
   openCart,
-  openCurrencies
+  openCurrencies,
 } from "../actions/cartActions";
+import DOMPurify from "dompurify";
 
 export function withParams(Component) {
-  return (props) => <Component {...props} navigate={useNavigate()} params={useParams()} />;
+  return (props) => (
+    <Component {...props} navigate={useNavigate()} params={useParams()} />
+  );
 }
 
 const endpoint = `https://graphql-scandiweb.herokuapp.com/`;
@@ -58,8 +61,19 @@ export const getCategory = async (category) => {
       products {
         id
         inStock
+        brand
         name
         gallery
+        attributes {
+          id
+          name
+          type
+          items{
+            displayValue
+            value
+            id
+          }
+        }
         prices{
           amount
           currency{
@@ -106,7 +120,8 @@ export const getProduct = async (product) => {
 };
 
 export const createMarkup = (html) => {
-  return { __html: html };
+  const clean = DOMPurify.sanitize(html);
+  return clean;
 };
 
 export const mapStateToProps = (state) => {
@@ -214,14 +229,35 @@ function loadProduct(dispatch, product) {
   });
 }
 
+const getDefaultProps = (attributes) => {
+  const defaultProps = attributes.reduce((acc, v) => {
+    acc[v.name] = v.items[0].value;
+    return acc;
+  }, {});
+  return defaultProps;
+};
+
 function addCart(dispatch, product, item) {
   //check if product exists in cart
+  if(!item && !product.properties){
+    const newProduct = {
+      properties: getDefaultProps(product.attributes),
+      id: product.id,
+      name: product.name,
+      brand: product.brand,
+      prices: product.prices,
+      attributes: product.attributes,
+      quantity: 1,
+      gallery: product.gallery,
+    }
+    return dispatch(addToCart(newProduct));
+  }
   if (item) {
     //add to quantity
-    dispatch(incCart(product));
+    return dispatch(incCart(product));
   } else {
     //add new item
     product.quantity = 1;
-    dispatch(addToCart(product));
+    return dispatch(addToCart(product));
   }
 }

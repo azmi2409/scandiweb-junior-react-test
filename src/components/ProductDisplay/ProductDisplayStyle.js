@@ -28,10 +28,11 @@ export const SidePict = styled.div`
 
 export const Description = styled.div`
   display: flex;
+  gap: 16px;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  height: 100%;
+  height: 560px;
 `;
 
 export const MainPict = styled.div`
@@ -85,14 +86,18 @@ export const Brand = styled.h2`
   font-size: 30px;
   font-weight: 600;
   line-height: 27px;
-  margin: 0.5em 0;
+  margin: 0;
+  padding: 0;
 `;
 
 export const Item  = styled.h3`
   font-size: 30px;
   font-weight: 400;
   line-height: 27px;
-  margin: 0.5em 0;
+  margin: 0;
+  margin-bottom: 35px;
+  padding: 0;
+
 `;
 
 export const Attributes = styled.div`
@@ -100,13 +105,14 @@ display: flex;
 flex-direction: column;
 justify-content: flex-start;
 align-items: flex-start;
+margin-bottom: 32px;
 `;
 
 export const AttrName = styled.h4`
   font-size: 18px;
   font-weight: 700;
   line-height: 18px;
-  margin: 0.5em 0;
+  margin: 8px 0;
   font-family: 'Roboto Condensed'
 `;
 
@@ -114,7 +120,9 @@ export const AttrPrice = styled.h4`
   font-size: 24px;
   font-weight: 700;
   line-height: 18px;
-  margin: 0.5em 0;
+  margin: 0;
+  margin-top: 2px;
+  margin-bottom: 4px;
 `;
 
 
@@ -163,6 +171,8 @@ font-weight: 400;
 font-size: 16px;
 line-height: 159.96%;
 width: 292px;
+min-height: 103px;
+overflow: scroll;
 color: #1D1F22;
 `;
 
