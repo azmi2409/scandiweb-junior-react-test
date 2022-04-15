@@ -8,7 +8,6 @@ import {
   Overlay,
   CartLogo,
   CartImage,
-  Success
 } from "./ProductListStyle";
 import CartCirle from "../../assets/CartCirle.svg";
 
