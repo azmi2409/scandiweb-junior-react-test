@@ -186,3 +186,22 @@ export const Overlay = styled.div`
   color: #8d8f9a;
   z-index: 2;
 `;
+
+export const Error = styled.h2`
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 18px;
+  margin: 0.5em 0;
+  font-family: 'Roboto Condensed';
+  color: red;
+`;
+
+export const Success = styled.h2`
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18px;
+  margin: 0.5em 0;
+  font-family: 'Roboto Condensed';
+  color: #5ECE7B;
+`;
+  

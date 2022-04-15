@@ -12,6 +12,8 @@ import {
   AttrType,
   ProductDesc,
   AttrPrice,
+  Success,
+  Error,
 } from "./ProductDisplayStyle";
 import React, { Component } from "react";
 import { withParams, createMarkup } from "../../lib/helpers/";
@@ -24,6 +26,9 @@ class ProductDisplay extends Component {
     this.state = {
       pictIndex: 0,
       properties: {},
+      success: false,
+      error: false,
+      errorMsg: "",
     };
     this.handleAddCart = this.handleAddCart.bind(this);
     this.validateProps = this.validateProps.bind(this);
@@ -52,6 +57,23 @@ class ProductDisplay extends Component {
     return validate;
   };
 
+  getErrorMessage = () => {
+    const { product } = this.props;
+    const { properties } = this.state;
+    const error = product.attributes.filter((v) => {
+      return properties[v.name] === undefined;
+    }
+    );
+    if (error.length > 0) {
+      const allError = error.reduce((acc,v) => {
+        return acc + `${v.name} `;
+      }
+      , "");
+
+      return `Please select ${allError}`;
+    }
+  }
+
   handleAddCart = () => {
     const checked = this.validateProps();
     if (checked) {
@@ -65,9 +87,17 @@ class ProductDisplay extends Component {
         quantity: 1,
         image: this.props.product.gallery,
       };
+      this.setState({ success: true });
+      setTimeout(() => {
+        this.setState({ success: false });
+      }, 3000);
       return this.props.handleAdd(newItems);
     }
-    return alert("You Need Fill All The Details");
+    this.setState({ error: true, errorMsg: this.getErrorMessage() });
+    setTimeout(() => {
+      this.setState({ error: false, errorMsg: "" });
+    }, 3000);
+    return false;
   };
 
   checkProps = (type, val) => {
@@ -149,6 +179,16 @@ class ProductDisplay extends Component {
               </Attributes>
               <AttrName>Price:</AttrName>
               <AttrPrice>{price(product.prices)}</AttrPrice>
+              {this.state.success && (
+                <Success>
+                  <span>Added To Cart</span>
+                  </Success>
+                  )}
+                  {this.state.error && (
+                    <Error>
+                      <span>{this.state.errorMsg}</span>
+                    </Error>
+                  )}
               <AddButton
                 inStock={product.inStock}
                 handleAddCart={this.handleAddCart}
