@@ -1,19 +1,11 @@
 import React, { Component } from "react";
 import {
   Grid,
-  Card,
-  Overlay,
-  CartLogo,
   Container,
   CategoryName,
-  ImgWrapper,
-  ImgHero,
-  PriceWrapper,
-  PriceTag,
 } from "./ProductListStyle";
-import { Link } from "react-router-dom";
 import { withParams } from "../../lib/helpers/";
-import CartCirle from "../../assets/CartCirle.svg";
+import Cards from "./Card";
 
 class ProductList extends Component {
   componentDidMount() {
@@ -32,28 +24,14 @@ class ProductList extends Component {
     }
   }
   render() {
-    const { products, price } = this.props;
+    const { products } = this.props;
     return (
       <Container>
         <CategoryName>{this.props.selected}</CategoryName>
         <Grid>
           {products &&
             products.map((v, i) => (
-              <Card key={i}>
-                <ImgWrapper>
-                  <ImgHero loading="lazy" src={v.gallery[0]} alt="Product" />
-                  {v.inStock && (<CartLogo>
-                    <Link to={`/product/${v.id}`}>
-                      <img src={CartCirle} alt="add to cart" />
-                    </Link>
-                  </CartLogo>)}
-                </ImgWrapper>
-                <PriceWrapper>
-                  <PriceTag weight={300}>{v.name}</PriceTag>
-                  <PriceTag weight={500}>{price(v.prices)}</PriceTag>
-                </PriceWrapper>
-                {!v.inStock && <Overlay>Out of Stock</Overlay>}
-              </Card>
+              <Cards key={i} v={v} {...this.props} />
             ))}
         </Grid>
       </Container>

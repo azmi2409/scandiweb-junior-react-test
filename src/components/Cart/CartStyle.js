@@ -18,8 +18,8 @@ export const Grid = styled.div`
 
 export const CartHeader = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
   margin: 0 1em;
   padding: 0;
   text-transform: uppercase;

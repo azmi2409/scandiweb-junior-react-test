@@ -2,22 +2,21 @@ import {
   Container,
   SidePict,
   Description,
-  MainPict,
   Swatch,
   Properties,
   Galleries,
-  Gallery,
   Brand,
   Item,
   Attributes,
   AttrName,
   AttrType,
-  Submit,
   ProductDesc,
   AttrPrice,
 } from "./ProductDisplayStyle";
 import React, { Component } from "react";
 import { withParams, createMarkup } from "../../lib/helpers/";
+import AddButton from "./AddButton";
+import Hero from "./Hero";
 
 class ProductDisplay extends Component {
   constructor(props) {
@@ -34,18 +33,20 @@ class ProductDisplay extends Component {
   };
 
   addProps = (val, name) => {
-    this.setState({
-      properties: {
-        ...this.state.properties,
-        [name]: val,
-      },
-    });
+    if (this.props.product.inStock) {
+      this.setState({
+        properties: {
+          ...this.state.properties,
+          [name]: val,
+        },
+      });
+    }
   };
 
   validateProps = () => {
     const { properties } = this.state;
     const { product } = this.props;
-    const validate = product.attributes.every((v, i) => {
+    const validate = product.attributes.every((v) => {
       return properties[v.name] !== undefined;
     });
     return validate;
@@ -93,6 +94,7 @@ class ProductDisplay extends Component {
           onClick={() => this.addProps(val, name)}
           color={val}
           selected={this.checkProps(name, val)}
+          disabled={!this.props.product.inStock}
         />
       );
     }
@@ -101,6 +103,7 @@ class ProductDisplay extends Component {
         key={val}
         onClick={() => this.addProps(val, name)}
         selected={this.checkProps(name, val)}
+        disabled={!this.props.product.inStock}
       >
         {val}
       </Properties>
@@ -112,49 +115,49 @@ class ProductDisplay extends Component {
     const { pictIndex } = this.state;
     return (
       <Container>
-        <SidePict>
-          {product &&
-            product.gallery &&
-            product.gallery.map((v, i) => (
-              <Galleries
-                loading="lazy"
-                key={v}
-                src={v}
-                alt="Product"
-                onClick={() => this.chPict(i)}
-              />
-            ))}
-        </SidePict>
-        <MainPict>
-          {product && product.gallery && (
-            <Gallery
-              loading="lazy"
-              src={product.gallery[pictIndex]}
-              alt="Product"
-            />
-          )}
-        </MainPict>
         {product && (
-          <Description>
-            <Brand>{product.brand}</Brand>
-            <Item>{product.name}</Item>
-            <Attributes>
-              {product.attributes?.map((v, i) => (
-                <React.Fragment key={i}>
-                  <AttrName key={v.name}>{v.name}</AttrName>
-                  <AttrType key={v.type}>
-                    {v.items.map((val) => this.Type(v.type, val.value, v.name))}
-                  </AttrType>
-                </React.Fragment>
+          <>
+            <SidePict>
+              {product.gallery?.map((v, i) => (
+                <Galleries
+                  loading="lazy"
+                  key={v}
+                  src={v}
+                  alt="Product"
+                  onClick={() => this.chPict(i)}
+                />
               ))}
-            </Attributes>
-            <AttrName>Price:</AttrName>
-            <AttrPrice>{price(product.prices)}</AttrPrice>
-            <Submit onClick={this.handleAddCart}>ADD TO CART</Submit>
-            <ProductDesc
-              dangerouslySetInnerHTML={createMarkup(product.description)}
+            </SidePict>
+            <Hero
+              image={product.gallery[pictIndex]}
+              inStock={product.inStock}
             />
-          </Description>
+            <Description>
+              <Brand>{product.brand}</Brand>
+              <Item>{product.name}</Item>
+              <Attributes>
+                {product.attributes?.map((v, i) => (
+                  <React.Fragment key={i}>
+                    <AttrName key={v.name}>{v.name}</AttrName>
+                    <AttrType key={v.type}>
+                      {v.items.map((val) =>
+                        this.Type(v.type, val.value, v.name)
+                      )}
+                    </AttrType>
+                  </React.Fragment>
+                ))}
+              </Attributes>
+              <AttrName>Price:</AttrName>
+              <AttrPrice>{price(product.prices)}</AttrPrice>
+              <AddButton
+                inStock={product.inStock}
+                handleAddCart={this.handleAddCart}
+              />
+              <ProductDesc
+                dangerouslySetInnerHTML={createMarkup(product.description)}
+              />
+            </Description>
+          </>
         )}
       </Container>
     );

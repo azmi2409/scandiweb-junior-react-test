@@ -36,11 +36,11 @@ export const Description = styled.div`
 export const MainPict = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
   height: 520px;
   justify-content: flex-start;
   align-items: center;
   padding: 1em 2em;
+  position: relative;
 `;
 
 export const Swatch = styled.div`
@@ -52,6 +52,7 @@ export const Swatch = styled.div`
   cursor: pointer;
   background-color: ${(props) => props.color};
   ${(props) => props.selected && `border: 4px solid #1D1F22;`}
+  ${(props) => props.disabled && `opacity: 0.5; cursor: not-allowed;`}
 `;
 
 export const Properties = styled.button`
@@ -66,6 +67,7 @@ export const Properties = styled.button`
   cursor: pointer;
   font-weight: 400;
   ${(props) => props.selected && `background: #1D1F22; color: white;`}
+  ${(props) => props.disabled && `opacity: 0.5; cursor: not-allowed;`}
 `;
 
 export const Galleries = styled.img`
@@ -76,6 +78,8 @@ export const Galleries = styled.img`
 
 export const Gallery = styled.img`
   height: 100%;
+  width: 100%;
+  object-fit: contain;
 `;
 
 export const Brand = styled.h2`
@@ -147,6 +151,10 @@ export const Submit = styled.button`
   :active {
     transform: scale(0.95);
   }
+  ${(props) => props.disabled && `
+    background: #C4C4C4;
+    cursor: not-allowed;
+    color: #1D1F22;`}
   `;
 
 export const ProductDesc = styled.div`
@@ -158,4 +166,23 @@ line-height: 159.96%;
 width: 292px;
 height: 103px;
 color: #1D1F22;
+`;
+
+export const Overlay = styled.div`
+  position: absolute;
+  cursor: default;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ffffff;
+  opacity: 0.5;
+  display: flex;
+  font-weight: 400;
+  font-size: 24px;
+  text-transform: uppercase;
+  align-items: center;
+  justify-content: center;
+  color: #8d8f9a;
+  z-index: 2;
 `;

@@ -1,5 +1,5 @@
 import { request, gql } from "graphql-request";
-import { useParams } from "react-router-dom";
+import { useParams , useNavigate} from "react-router-dom";
 import {
   addToCategories,
   addToCart,
@@ -19,7 +19,7 @@ import {
 } from "../actions/cartActions";
 
 export function withParams(Component) {
-  return (props) => <Component {...props} params={useParams()} />;
+  return (props) => <Component {...props} navigate={useNavigate()} params={useParams()} />;
 }
 
 const endpoint = `https://graphql-scandiweb.herokuapp.com/`;
@@ -82,6 +82,7 @@ export const getProduct = async (product) => {
       gallery
       description
       brand
+      inStock
       attributes {
         id
         name

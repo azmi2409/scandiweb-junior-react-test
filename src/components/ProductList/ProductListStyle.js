@@ -14,16 +14,18 @@ export const Grid = styled.div`
   grid-gap: 1em;
   padding: 1em;
   margin: 1em;
-  max-width: 100%;
+  width: 100%;
 `;
 
 export const Card = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 1em;
+  cursor: pointer;
+  padding: 16px;
   gap: 0.5em;
-  width: 100%;
+  width: 386px;
+  height: 444px;
   :hover {
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
   }
@@ -51,24 +53,22 @@ export const Overlay = styled.div`
 export const CartLogo = styled.div`
   display: flex;
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: -26px;
+  right: 31px;
   padding: 0;
-  max-width: 52px;
-  max-height: 52px;
-  cursor: pointer;
   display: none;
-  margin-right: 27px;
-  transform: translateY(50%);
-  
+
   :active {
     transform: scale(0.95);
-    transform: translateY(50%);
   }
 
   ${Card}:hover & {
     display: flex;
   }
+`;
+
+export const CartImage = styled.img`
+  display: flex;
 `;
 
 export const CategoryName = styled.h1`
@@ -86,9 +86,9 @@ export const ImgWrapper = styled.div`
 `;
 
 export const ImgHero = styled.img`
-  width: 100%;
   object-fit: contain;
-  max-height: 338px;
+  height: 338px;
+  width: 356px;
 `;
 
 export const PriceWrapper = styled.div`
@@ -96,17 +96,16 @@ export const PriceWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  margin: 0.5em 1em;
-  gap: 0.5em;
 `;
 
 export const PriceTag = styled.span`
   font-size: 18px;
+  line-height: 160%;
   font-weight: ${(props) => (props.weight ? props.weight : "400")};
-  `;
+`;
 
 export const Main = styled.div`
   margin: 0;
   padding: 0;
   position: relative;
-  `;
+`;
