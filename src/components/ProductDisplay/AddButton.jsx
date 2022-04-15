@@ -6,7 +6,7 @@ export default class AddButton extends Component {
     return (
       <>
       {this.props.inStock ? (
-          <Submit onClick={() => this.props.handleAddCart}>
+          <Submit onClick={this.props.handleAddCart}>
             Add to Cart
           </Submit>
         ) : (
