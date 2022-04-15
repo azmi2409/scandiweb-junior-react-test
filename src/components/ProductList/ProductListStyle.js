@@ -15,9 +15,18 @@ export const Grid = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   padding: 0;
   margin: 0;
-  column-gap: 2.5rem;
+  column-gap: 0.5rem;
   row-gap: 6.4375rem
 `;
+
+export const CardContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  `;
 
 export const Card = styled.div`
   position: relative;
@@ -25,6 +34,7 @@ export const Card = styled.div`
   flex-direction: column;
   cursor: pointer;
   padding: 1em;
+  margin: 0;
   width: 24.125em;
   height: 27.75em;
   :hover {
