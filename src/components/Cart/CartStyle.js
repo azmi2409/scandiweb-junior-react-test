@@ -210,3 +210,9 @@ export const LeftPointer = styled.div`
     display: flex;
   }
 `;
+
+export const Attribute = styled.div`
+  flex-direction: row;
+  display: flex;
+  gap: 0.75em;
+`;

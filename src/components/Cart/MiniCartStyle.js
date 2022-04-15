@@ -1,11 +1,10 @@
 import styled from "styled-components";
 export const MiniCartContainer = styled.div`
   display: grid;
-  padding-right: 87px;
   background: #ffffff;
-  max-height: 540px;
+  max-height: 33.75rem;
   height: 100%;
-  padding: 0 1em;
+  padding: 0.5rem 1rem;
   grid-template-rows: 1fr 8fr 1fr 1fr;
 `;
 
@@ -242,4 +241,14 @@ export const TotalPrices = styled.h3`
   font-size: 1rem;
   line-height: 1.125rem;
   color: #1d1f22;
+`;
+
+export const Attribute = styled.div`
+  flex-direction: row;
+  display: flex;
+  gap: 0.5em;
+`;
+
+export const TotalItem = styled.span`
+  font-weight: 500;
 `;

@@ -119,3 +119,10 @@ export const CartNumber = styled.div`
 export const ArrowImg = styled.img`
   transform: ${(props) => (props.rotate ? "rotate(180deg)" : "rotate(0deg)")};
 `;
+
+export const CurrSymbol = styled.h2`
+margin-right: 0.5125rem;
+font-weight: 500;
+font-size: 1.125rem;
+line-height: 160%;
+`;

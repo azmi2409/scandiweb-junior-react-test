@@ -10,7 +10,8 @@ import {
   CartNumber,
   Currency,
   ArrowImg,
-  CurrItem
+  CurrItem,
+  CurrSymbol
 } from "./HeaderStyle";
 import { withParams } from "../../lib/helpers";
 import Brand from "../../assets/Brand.svg";
@@ -50,16 +51,9 @@ class Header extends Component {
         </NavBrand>
         <NavMenus>
           <NavMenu key={"currencies"} ref={this.props.curRef} onClick={curr}>
-            <p
-              style={{
-                marginRight: 10,
-                fontWeight: 500,
-                fontSize: 18,
-                lineHeight: "160%",
-              }}
-            >
+            <CurrSymbol>
               {this.props.currency}
-            </p>
+            </CurrSymbol>
             <ArrowImg
               rotate={isCurrencyOpen ? "true" : ""}
               src={Arrow}
@@ -88,7 +82,7 @@ class Header extends Component {
             ref={this.props.cartRef}
             onClick={this.props.handleCart}
           >
-            <img src={Cart} style={{ position: "relative" }} alt="Cart" />
+            <img src={Cart} alt="Cart" />
             {cart.length > 0 && <CartNumber>{cart.length}</CartNumber>}
           </NavMenu>
         </NavMenus>

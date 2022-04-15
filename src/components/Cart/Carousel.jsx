@@ -32,20 +32,12 @@ export default class Carousel extends Component {
         <CartImg src={image[activeIndex]} alt={image} />
         {this.state.activeIndex !== 0 && (
           <RightPointer onClick={this.handleDecrease}>
-            <img
-              style={{ transform: "matrix(-1, 0, 0, 1, 0, 0)" }}
-              src={Right}
-              alt="right"
-            />
+            <img src={Left} alt="left" />
           </RightPointer>
         )}
         {this.state.activeIndex !== this.maxIndex && (
           <LeftPointer onClick={this.handleIncrease}>
-            <img
-              style={{ transform: "matrix(-1, 0, 0, 1, 0, 0)" }}
-              src={Left}
-              alt="left"
-            />
+            <img src={Right} alt="right" />
           </LeftPointer>
         )}
       </CartFigure>

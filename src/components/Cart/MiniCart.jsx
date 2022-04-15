@@ -19,7 +19,9 @@ import {
   MiniButton,
   MiniCartPrices,
   Total,
-  TotalPrices
+  TotalPrices,
+  Attribute,
+  TotalItem
 } from "./MiniCartStyle";
 import { Link } from "react-router-dom";
 
@@ -48,13 +50,13 @@ class MiniCart extends Component {
     );
   };
   getTotalPrice = () => {
-    const totalPrice = this.props.cart.reduce((acc,v) => {
-        const price = parseFloat(this.props.price(v.prices).slice(1))
-        const quantity = parseInt(v.quantity)
-        return acc + (price * quantity)
-    },0)
-    const currency = this.props.currency
-    return `${currency}${totalPrice.toFixed(2)}`
+    const totalPrice = this.props.cart.reduce((acc, v) => {
+      const price = parseFloat(this.props.price(v.prices).slice(1));
+      const quantity = parseInt(v.quantity);
+      return acc + price * quantity;
+    }, 0);
+    const currency = this.props.currency;
+    return `${currency}${totalPrice.toFixed(2)}`;
   };
   render() {
     const { cart } = this.props;
@@ -62,31 +64,24 @@ class MiniCart extends Component {
       <MiniCartContainer onClick={(e) => e.stopPropagation()}>
         <MiniCartHeader>
           My Bag
-          <span style={{ fontWeight: 500 }}>{`, ${cart.length} Items`}</span>
+          <TotalItem>{`, ${cart.length} Items`}</TotalItem>
         </MiniCartHeader>
         <CartContainer>
           {cart.map((item, i) => {
             return (
               <MiniCartItems key={i}>
-                <div style={{ width: "100%" }}>
+                <div>
                   <Brand>{item.brand}</Brand>
                   <Name>{item.name}</Name>
                   <Price>{this.props.price(item.prices)}</Price>
                   <Attributes>
                     {item.attributes.map((attr, index) => {
                       return (
-                        <div
-                          style={{
-                            flexDirection: "row",
-                            display: "flex",
-                            gap: "0.5em",
-                          }}
-                          key={index}
-                        >
+                        <Attribute key={index}>
                           {attr.items.map((v) =>
                             this.Type(attr.type, v.value, attr.id, i)
                           )}
-                        </div>
+                        </Attribute>
                       );
                     })}
                   </Attributes>
@@ -106,8 +101,8 @@ class MiniCart extends Component {
           })}
         </CartContainer>
         <MiniCartPrices>
-        <Total>Total</Total>
-        <TotalPrices>{this.getTotalPrice()}</TotalPrices>
+          <Total>Total</Total>
+          <TotalPrices>{this.getTotalPrice()}</TotalPrices>
         </MiniCartPrices>
         <MiniCartBottom>
           <Link to={"/cart"}>

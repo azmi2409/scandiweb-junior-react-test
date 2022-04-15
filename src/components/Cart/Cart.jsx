@@ -15,6 +15,7 @@ import {
   Swatch,
   Properties,
   Attributes,
+  Attribute,
 } from "./CartStyle";
 import Carousel from "./Carousel";
 
@@ -66,18 +67,11 @@ export default class Cart extends Component {
                       <Attributes>
                         {item.attributes.map((attr, index) => {
                           return (
-                            <div
-                              style={{
-                                flexDirection: "row",
-                                display: "flex",
-                                gap: "0.5em",
-                              }}
-                              key={index}
-                            >
+                            <Attribute key={index}>
                               {attr.items.map((v) =>
                                 this.Type(attr.type, v.value, attr.id, i)
                               )}
-                            </div>
+                            </Attribute>
                           );
                         })}
                       </Attributes>
