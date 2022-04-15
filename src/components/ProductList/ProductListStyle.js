@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   padding: 5rem 6.375rem;
-  padding-bottom: 11.9375rem;
   margin: 0;
   max-width: 100%;
   display: flex;
@@ -17,6 +16,7 @@ export const Grid = styled.div`
   margin: 0;
   column-gap: 0.5rem;
   row-gap: 6.4375rem
+  margin-bottom: 11.9375rem;
 `;
 
 export const CardContainer = styled.div`
@@ -63,6 +63,7 @@ export const Overlay = styled.div`
   justify-content: center;
   color: #8d8f9a;
   z-index: 2;
+  margin-left: 1rem;
 `;
 
 export const CartLogo = styled.div`
