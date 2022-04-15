@@ -51,7 +51,7 @@ export default class Cart extends Component {
       <Container>
         <CartHeader>
           <Title>Cart</Title>
-          {cart.length == 0 && <Name>Your cart is empty</Name>}
+          {cart.length === 0 && <Name>Your cart is empty</Name>}
         </CartHeader>
         <Grid>
           <div>
