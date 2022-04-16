@@ -75,7 +75,7 @@ export const Currency = styled.div`
   padding: 1.25rem;
   position: absolute;
   flex-direction: column;
-  gap: 3.125rem;
+  gap: 1.25rem;
   top: 70%;
   left: -150%;
   bottom: 0;
@@ -83,7 +83,7 @@ export const Currency = styled.div`
   font-size: 1.125rem;
   line-height: 160%;
   font-weight: 500;
-  overflow: scroll;
+  overflow: hidden;
   height: 10.5625rem;
   width: 7.125rem;
   background: #ffffff;
